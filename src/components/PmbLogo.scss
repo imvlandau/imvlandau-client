@@ -1,0 +1,61 @@
+.pmb-logo {
+  .cls-1 {
+    isolation: isolate;
+  }
+  .cls-2 {
+    opacity: 0.75;
+    mix-blend-mode: multiply;
+  }
+  .cls-3,
+  .cls-4 {
+    fill-rule: evenodd;
+  }
+  .cls-4 {
+    fill: #5474b6;
+  }
+  .cls-5 {
+    fill: #fff;
+  }
+  .pmb-logo-x-shape {
+    .cls-4 {
+      transition: fill 0.8s ease 0s;
+    }
+    &.hovered .cls-4,
+    &:hover .cls-4 {
+      fill: white;
+      transition: fill 0.1s ease 0s;
+    }
+  }
+  &.hidden {
+    display: none;
+  }
+  &.inverted {
+    .cls-4 {
+      fill: #fff;
+    }
+    .cls-5 {
+      fill: #5474b6;
+    }
+    .pmb-logo-x-shape {
+      &.hovered .cls-4,
+      &:hover .cls-4 {
+        fill: #5474b6;
+      }
+      &.hovered .cls-5,
+      &:hover .cls-5 {
+        fill: #fff;
+      }
+    }
+  }
+  &.rotating {
+    animation: rotating 3s linear infinite;
+  }
+  @keyframes rotating {
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

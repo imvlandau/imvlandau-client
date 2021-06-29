@@ -1,0 +1,50 @@
+{
+  "short_name": "Playmobox Client",
+  "name": "Playmobox web application editor client",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "favicons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "favicons/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "favicons/apple-touch-icon-120x120.png",
+      "sizes": "120x120",
+      "type": "apple-touch-icon"
+    },
+    {
+      "src": "favicons/apple-touch-icon-152x152.png",
+      "sizes": "152x152",
+      "type": "apple-touch-icon"
+    },
+    {
+      "src": "favicons/apple-touch-icon-167x167.png",
+      "sizes": "167x167",
+      "type": "apple-touch-icon"
+    },
+    {
+      "src": "favicons/apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "apple-touch-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

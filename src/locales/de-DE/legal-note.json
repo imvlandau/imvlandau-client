@@ -1,0 +1,22 @@
+{
+  "heading.legal.note": "Impressum",
+  "subheading.founder.and.ceo": "Gründer und Geschäftsführer",
+  "caption.diplomated.computer.scientist": "Diplom-Informatiker (HS)",
+  "subheading.scientific.director.and.coo": "Leiterin des operativen Geschäfts",
+  "caption.doctor.of.medicine": "Doktor der Medizin",
+  "subheading.email": "E-Mail",
+  "subheading.fon": "Telefon",
+  "subheading.fax": "Fax",
+  "heading.about.playmobox": "Über Playmobox",
+  "caption.about.playmobox": "Playmobox wurde ursprünglich mit dem einzigen Zweck erstellt, die Low-Level-Elemente von HTML mit den High-Level-Komponenten von Bootstrap zu umschließen. Letztendlich ist Playmobox ein Editor, der sich darauf konzentriert, grundlegende programmatische Komponenten mit minimalem Aufwand bereitzustellen.",
+  "heading.contributing": "Mitmachen",
+  "caption.contributing": "Hilfe ist jederzeit willkommen! Playmobox basiert auf React und Symfony. Auch wenn euch das jetzt nichts sagt, können Ihr euch trotzdem an uns wenden. Wir freuen uns über jedes Feedback.",
+  "heading.bypass": "Sicherheitslücke entdeckt?",
+  "caption.bypass": "In diesem Fall qualifizieren Sie sich wahrscheinlich für eine saftige \"Bugbounty\"-Prämie! Wenn Sie also einen Weg finden, die Schutzmechanismen von Playmobox zu umgehen oder zu schwächen, schauen Sie sich bitte unsere <1>offizielle Bugbounty-Seite</1> an.",
+  "heading.donate": "Spenden",
+  "caption.donate": "Playmobox wird von einer Gemeinschaft von Freiwilligen, Influencern und Spendern ermöglicht. Eure Spenden sind für uns von entscheidender Bedeutung. Sie ermöglichen es uns, weiterhin neue Funktionen zu entwickeln, Fehler zu beheben, den Seiteninhalt zu übersetzen, die Server am Leben zu erhalten und nicht zuletzt das Projekt frei von Werbung zu halten.",
+  "subheading.account": "Empfänger",
+  "subheading.iban": "IBAN",
+  "subheading.bank": "BANK",
+  "subheading.swift.bic": "SWIFT/BIC"
+}

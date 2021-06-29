@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "pmb.sync.server",
+      "script": "scripts/synchronizer.js",
+      "interpreter": "node",
+      "watch": ["scripts/synchronizer.js"],
+      "watch_options": {
+        "usePolling": true
+      }
+    },
+    {
+      "name": "pmb.dev.server",
+      "script": "scripts/start.js",
+      "interpreter": "node",
+      "watch": ["scripts/start.js"],
+      "watch_options": {
+        "usePolling": true,
+         "followSymlinks": false
+      },
+      "max_memory_restart": "1500M"
+    }
+  ]
+}
