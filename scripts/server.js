@@ -6,7 +6,7 @@ const https = require("https");
 const fs = require("fs");
 const helmet = require("helmet");
 const paths = require("../config/paths");
-const i18next = require("../config/pmb-i18next-resource-bundler");
+const i18next = require("../config/imv-i18next-resource-bundler");
 const buildFolder = path.relative(process.cwd(), paths.appBuild);
 
 require("dotenv").config();
@@ -24,32 +24,7 @@ const sslOptions = process.env.HTTPS === "true" && {
   )
 };
 
-const synchronizerOptions =
-  process.env.NODE_ENV === "production"
-    ? {
-        target: `${process.env.SYNCHRONIZER_TARGET_SSL ||
-          "wss://localhost:4433/synchronizer/"}`,
-        ssl: sslOptions,
-        secure: true, // verify the SSL Certs
-        ws: true
-      }
-    : process.env.HTTPS === "true"
-    ? {
-        target: `${process.env.SYNCHRONIZER_TARGET_SSL ||
-          "wss://localhost:4433/synchronizer/"}`,
-        secure: false, // verify the SSL Certs
-        ws: true
-      }
-    : {
-        target: `${process.env.SYNCHRONIZER_TARGET ||
-          "ws://localhost:4444/synchronizer/"}`,
-        ws: true
-      };
-
 app.use(helmet());
-
-// Pass Websocket-Requests to synchronizer
-app.use(proxy("/synchronizer", synchronizerOptions));
 
 // Pass API-Requests to backend
 app.use(

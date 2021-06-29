@@ -1,5 +1,5 @@
 {
-  "name": "playmobox-client",
+  "name": "imvlandau-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -107,7 +107,6 @@
   "scripts": {
     "start": "pm2 start pm2.config.dev.json",
     "dev": "node scripts/start.js",
-    "synchronizer": "node scripts/synchronizer.js",
     "server": "npm run build && pm2 start pm2.config.prod.json",
     "build": "node --max_old_space_size=4096 scripts/build.js",
     "test": "node scripts/test.js"
