@@ -15,11 +15,11 @@ const app = express();
 
 const sslOptions = process.env.HTTPS === "true" && {
   cert: fs.readFileSync(
-    process.env.SSL_CERT_FILE || path.join(paths.appCerts, "server.crt"),
+    process.env.SSL_CERT_FILE,
     "utf8"
   ),
   key: fs.readFileSync(
-    process.env.SSL_CERT_KEY_FILE || path.join(paths.appCerts, "server.key"),
+    process.env.SSL_CERT_KEY_FILE,
     "utf8"
   )
 };

@@ -75,15 +75,15 @@ module.exports = function(proxy, allowedHost) {
     // Enable HTTPS if the HTTPS environment variable is set to 'true'
     https: protocol === 'https' ? {
       cert: fs.readFileSync(
-        process.env.SSL_CERT_FILE || path.join(paths.appCerts, 'server.crt'),
+        process.env.SSL_CERT_FILE,
         "utf8"
       ),
       key: fs.readFileSync(
-        process.env.SSL_CERT_KEY_FILE || path.join(paths.appCerts, 'server.key'),
+        process.env.SSL_CERT_KEY_FILE,
         "utf8"
       ),
       ca: fs.readFileSync(
-        process.env.SSL_CA_FILE || path.join(paths.appCerts, 'rootCA.pem'),
+        process.env.SSL_CA_FILE,
         "utf8"
       )
     } : false,

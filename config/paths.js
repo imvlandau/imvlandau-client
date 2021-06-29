@@ -70,7 +70,6 @@ module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp('build'),
-  appCerts: resolveApp('certs'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appSrcLocales: resolveApp('src/locales'),
