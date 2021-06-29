@@ -1,6 +1,6 @@
 {
-  "short_name": "Playmobox Client",
-  "name": "Playmobox web application editor client",
+  "short_name": "imvlandau-client",
+  "name": "IMV-Landau e. V. Frontend",
   "icons": [
     {
       "src": "favicon.ico",

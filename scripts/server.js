@@ -64,21 +64,21 @@ app.use(express.static(buildFolder));
 
 app.get("/locales/:lng/:ns.json", (req, res) => {
   res.setHeader("Content-Type", "application/json; charset=utf-8");
-  console.log("[PMB] Requested URL:", new Date().toLocaleString(), req.url);
+  console.log("[IMV] Requested URL:", new Date().toLocaleString(), req.url);
   const data = i18next(paths.appPublicLocales, req.params.lng, req.params.ns);
   res.end(JSON.stringify(data));
 });
 
 // Handle React routing, return all requests to code editor
 app.get("/edit/*", function(req, res) {
-  console.log("[PMB] Requested URL for /edit/*:", req.url);
+  console.log("[IMV] Requested URL for /edit/*:", req.url);
   res.sendFile(path.join(paths.appBuild, "index.html"));
 });
 
 // Handle React routing, return all requests to landing page
 app.get("/*", function(req, res) {
   console.log(
-    "[PMB] Requested URL for /*:",
+    "[IMV] Requested URL for /*:",
     new Date().toLocaleString(),
     req.url
   );

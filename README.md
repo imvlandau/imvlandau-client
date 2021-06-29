@@ -1,4 +1,4 @@
-# playmobox-client
+# imvlandau-client
 
 Frontend (static pages and code editor) as well as Websocket-Server
 
