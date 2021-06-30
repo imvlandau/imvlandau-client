@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import PmbLogo from "./PmbLogo";
 
 const useStyles = makeStyles(theme => ({
   link: {
@@ -37,13 +36,7 @@ function PmbBrand({ rotating }) {
   return (
     <Typography color="inherit" variant="h6">
       <a className={classes.link} href={"/"}>
-        <PmbLogo
-          className={classes.symbol}
-          inverted={true}
-          rotating={rotating}
-          size={15}
-        />
-        playmobox
+        IMV-Landau e.V. - Islamischer multikultureller Verein Landau (الجمعية الاسلامية للثقافات المتعددة مسجد ابي بكر الصديق)
       </a>
     </Typography>
   );

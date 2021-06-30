@@ -27,7 +27,7 @@ function PmbFooter({ showDivider = false, ...otherProps }) {
     <Box justifyContent="center" textAlign="center" p={4} {...otherProps}>
       {showDivider && <hr className={classes.divider} />}
       <Typography variant="caption">
-        Copyright by Playmobox © All rights reserved -&nbsp;
+        Copyright by IMV-Landau e. V.  © All rights reserved -&nbsp;
         <Link to="/legal-note" className={classes.link}>
           {t("link.legal.note")}
         </Link>
