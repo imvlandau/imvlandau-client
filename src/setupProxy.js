@@ -2,7 +2,7 @@ const proxy = require("http-proxy-middleware");
 const i18next = require("../config/imv-i18next-resource-bundler");
 const paths = require("../config/paths");
 
-require("dotenv").config();
+require("dotenv").config({ path: '.env.local' });
 
 const apiOptions =
   process.env.HTTPS === "true"

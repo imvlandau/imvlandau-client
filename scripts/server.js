@@ -9,7 +9,7 @@ const paths = require("../config/paths");
 const i18next = require("../config/imv-i18next-resource-bundler");
 const buildFolder = path.relative(process.cwd(), paths.appBuild);
 
-require("dotenv").config();
+require("dotenv").config({ path: '.env.local' });
 
 const app = express();
 

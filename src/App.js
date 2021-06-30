@@ -99,21 +99,9 @@ function App() {
         <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <Switch>
-            <Route exact path={"/"} component={Home} />
-            <Route exact path={"/legal-note"} component={LegalNote} />
-            <Route
-              exact
-              path={"/start"}
-              render={props => <Servers data={[]} {...props} />}
-            />
-            <Route exact path={"/new/server"} component={Server} />
+            <Route exact path={"/"} component={Server} />
             <Route exact path={"/servers"} component={Servers} />
             <Route exact path={"/loading"} component={Loading} />
-            <Route
-              exact
-              path={"/(new|edit)/:shortid/(.*)?"}
-              component={DnDEditor}
-            />
             <PrivateRoute exact path="/profile" component={Profile} />
           </Switch>
         </MuiThemeProvider>
