@@ -8,13 +8,7 @@ import {
 } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import grey from "@material-ui/core/colors/grey";
-import HTML5Backend from "react-dnd-html5-backend";
-import TouchBackend from "react-dnd-touch-backend";
-import { DragDropContext as dragDropContext } from "react-dnd";
 import { fromEvent } from "file-selector";
-import { Home } from "./views/home";
-import { LegalNote } from "./views/legal-note";
-import { Editor } from "./views/editor";
 import { Servers } from "./views/servers";
 import { Server, Loading } from "./views/server";
 import Profile from "./components/Profile";
@@ -38,12 +32,6 @@ export const HTML5BackendWithFolderSupport = manager => {
 
   return backend;
 };
-
-const wrap = dragDropContext(
-  isTouchDevice ? TouchBackend : HTML5BackendWithFolderSupport
-);
-
-const DnDEditor = wrap(Editor);
 
 const theme = responsiveFontSizes(
   createMuiTheme({

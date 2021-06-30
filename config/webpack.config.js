@@ -25,7 +25,6 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
@@ -607,12 +606,6 @@ module.exports = function(webpackEnv) {
           silent: true,
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
-        }),
-        // this is good to generate a smaller editor bundle
-        // by selecting only certain languages or only certain editor features
-        new MonacoWebpackPlugin({
-          // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
-          languages: ['json', 'javascript', 'typescript', 'css', 'scss', 'html', 'yaml', 'php', 'dockerfile']
         }),
         new webpack.ProvidePlugin({
           $: 'jquery',
