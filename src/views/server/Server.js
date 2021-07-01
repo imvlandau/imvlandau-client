@@ -65,6 +65,7 @@ function Server({ history, notifications, ...props }) {
     companion_3: "",
     companion_4: ""
   });
+
   // ########## stepper
   const handleNext = () => {
     if (activeStep === amountOfSteps - 1) {
