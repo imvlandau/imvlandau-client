@@ -13,10 +13,10 @@ export const provisionServer = (
   name,
   email,
   mobile,
-  companion_1,
-  companion_2,
-  companion_3,
-  companion_4
+  companion1,
+  companion2,
+  companion3,
+  companion4
 ) => (dispatch, getState) => {
   dispatch({ type: constants.DEPLOY_SERVER_REQUEST });
   return axiosInstance
@@ -24,10 +24,10 @@ export const provisionServer = (
       name,
       email,
       mobile,
-      companion_1,
-      companion_2,
-      companion_3,
-      companion_4
+      companion1,
+      companion2,
+      companion3,
+      companion4
     })
     .then(response => {
       dispatch({

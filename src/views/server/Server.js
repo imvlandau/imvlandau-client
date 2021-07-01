@@ -60,10 +60,10 @@ function Server({ history, notifications, ...props }) {
     name: "",
     email: "",
     mobile: "",
-    companion_1: "",
-    companion_2: "",
-    companion_3: "",
-    companion_4: ""
+    companion1: "",
+    companion2: "",
+    companion3: "",
+    companion4: ""
   });
 
   // ########## stepper
@@ -79,14 +79,14 @@ function Server({ history, notifications, ...props }) {
             valuesServerData.name,
             valuesServerData.email,
             valuesServerData.mobile,
-            valuesServerData.companion_1,
-            valuesServerData.companion_2,
-            valuesServerData.companion_3,
-            valuesServerData.companion_4
+            valuesServerData.companion1,
+            valuesServerData.companion2,
+            valuesServerData.companion3,
+            valuesServerData.companion4
           )
           .then(() => {
             // history.push("/loading");
-            setActiveStep(prevActiveStep => prevActiveStep + 1);
+    // setActiveStep(prevActiveStep => prevActiveStep + 1);
             props.addNotification({
               key: "key_pair.success",
               message: t(
@@ -203,8 +203,8 @@ function Server({ history, notifications, ...props }) {
                       label={t("Person 1")}
                       className={classes.textField}
                       fullWidth
-                      value={valuesServerData.companion_1 || ""}
-                      onChange={handleChangeServerData("companion_1")}
+                      value={valuesServerData.companion1 || ""}
+                      onChange={handleChangeServerData("companion1")}
                       variant="filled"
                     />
                   </Grid>
@@ -214,8 +214,8 @@ function Server({ history, notifications, ...props }) {
                       label={t("Person 2")}
                       className={classes.textField}
                       fullWidth
-                      value={valuesServerData.companion_2 || ""}
-                      onChange={handleChangeServerData("companion_2")}
+                      value={valuesServerData.companion2 || ""}
+                      onChange={handleChangeServerData("companion2")}
                       variant="filled"
                     />
                   </Grid>
@@ -225,8 +225,8 @@ function Server({ history, notifications, ...props }) {
                       label={t("Person 3")}
                       className={classes.textField}
                       fullWidth
-                      value={valuesServerData.companion_3 || ""}
-                      onChange={handleChangeServerData("companion_3")}
+                      value={valuesServerData.companion3 || ""}
+                      onChange={handleChangeServerData("companion3")}
                       variant="filled"
                     />
                   </Grid>
@@ -236,8 +236,8 @@ function Server({ history, notifications, ...props }) {
                       label={t("Person 4")}
                       className={classes.textField}
                       fullWidth
-                      value={valuesServerData.companion_4 || ""}
-                      onChange={handleChangeServerData("companion_4")}
+                      value={valuesServerData.companion4 || ""}
+                      onChange={handleChangeServerData("companion4")}
                       variant="filled"
                     />
                   </Grid>
