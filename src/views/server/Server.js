@@ -57,13 +57,13 @@ function Server({ history, notifications, ...props }) {
 
   // ########## server data
   const [valuesServerData, setValuesServerData] = React.useState({
-    name: null,
-    email: null,
-    mobile: null,
-    companion_1: null,
-    companion_2: null,
-    companion_3: null,
-    companion_4: null
+    name: "",
+    email: "",
+    mobile: "",
+    companion_1: "",
+    companion_2: "",
+    companion_3: "",
+    companion_4: ""
   });
   // ########## stepper
   const handleNext = () => {
