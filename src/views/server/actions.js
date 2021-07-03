@@ -40,7 +40,13 @@ export const provisionServer = (
     })
     .catch(response => {
       dispatch({ type: constants.DEPLOY_SERVER_FAILURE });
-      dispatch(addNotifications(response));
+
+      var reader = new FileReader();
+      reader.addEventListener("loadend", function() {
+         dispatch(addNotifications(JSON.parse( new TextDecoder().decode(reader.result))));
+      });
+      reader.readAsArrayBuffer(response && response[0]);
+
       return new Promise(() => {});
     });
 };
