@@ -91,7 +91,7 @@ function Server({ history, notifications, ...props }) {
             props.addNotification({
               key: "key_pair.success",
               message: t(
-                "Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach."
+                "Ihre Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach."
               ),
               type: "success"
             });
