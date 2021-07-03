@@ -10,7 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import grey from "@material-ui/core/colors/grey";
 import { fromEvent } from "file-selector";
 import { Servers } from "./views/servers";
-import { Server, Loading } from "./views/server";
+import { Server } from "./views/server";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
@@ -89,7 +89,6 @@ function App() {
           <Switch>
             <Route exact path={"/"} component={Server} />
             <Route exact path={"/servers"} component={Servers} />
-            <Route exact path={"/loading"} component={Loading} />
             <PrivateRoute exact path="/profile" component={Profile} />
           </Switch>
         </MuiThemeProvider>

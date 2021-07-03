@@ -86,7 +86,6 @@ function Server({ history, notifications, ...props }) {
             valuesServerData.companion4
           )
           .then(qrCodeImageData => {
-            // history.push("/loading");
             setActiveStep(prevActiveStep => prevActiveStep + 1);
             props.addNotification({
               key: "key_pair.success",
