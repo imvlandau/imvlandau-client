@@ -20,17 +20,21 @@ export const provisionServer = (
 ) => (dispatch, getState) => {
   dispatch({ type: constants.DEPLOY_SERVER_REQUEST });
   return axiosInstance
-    .post(`/api/attendees/create`, {
-      name,
-      email,
-      mobile,
-      companion1,
-      companion2,
-      companion3,
-      companion4
-    }, {
-      responseType: "blob"
-    })
+    .post(
+      `/api/attendees/create`,
+      {
+        name,
+        email,
+        mobile,
+        companion1,
+        companion2,
+        companion3,
+        companion4
+      },
+      {
+        responseType: "blob"
+      }
+    )
     .then(response => {
       dispatch({
         type: constants.DEPLOY_SERVER_SUCCESS
@@ -43,7 +47,9 @@ export const provisionServer = (
 
       var reader = new FileReader();
       reader.addEventListener("loadend", function() {
-         dispatch(addNotifications(JSON.parse( new TextDecoder().decode(reader.result))));
+        dispatch(
+          addNotifications(JSON.parse(new TextDecoder().decode(reader.result)))
+        );
       });
       reader.readAsArrayBuffer(response && response[0]);
 
