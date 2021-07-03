@@ -63,7 +63,8 @@ function Server({ history, notifications, ...props }) {
     companion1: "",
     companion2: "",
     companion3: "",
-    companion4: ""
+    companion4: "",
+    qrCodeImageData: null
   });
 
   // ########## stepper
@@ -84,15 +85,19 @@ function Server({ history, notifications, ...props }) {
             valuesServerData.companion3,
             valuesServerData.companion4
           )
-          .then(() => {
+          .then(qrCodeImageData => {
             // history.push("/loading");
-    // setActiveStep(prevActiveStep => prevActiveStep + 1);
+            setActiveStep(prevActiveStep => prevActiveStep + 1);
             props.addNotification({
               key: "key_pair.success",
               message: t(
                 "Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach."
               ),
               type: "success"
+            });
+            setValuesServerData({
+              ...valuesServerData,
+              ["qrCodeImageData"]: qrCodeImageData
             });
           });
       } else {
@@ -154,7 +159,9 @@ function Server({ history, notifications, ...props }) {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={4}>
                     <TextField
-                      error={Boolean(formNotFilledOut.length && !valuesServerData.name)}
+                      error={Boolean(
+                        formNotFilledOut.length && !valuesServerData.name
+                      )}
                       autoFocus
                       id="name"
                       label={t("Vor- und Nachname*")}
@@ -167,7 +174,9 @@ function Server({ history, notifications, ...props }) {
                   </Grid>
                   <Grid item xs={12} sm={4}>
                     <TextField
-                      error={Boolean(formNotFilledOut.length && !valuesServerData.email)}
+                      error={Boolean(
+                        formNotFilledOut.length && !valuesServerData.email
+                      )}
                       id="email"
                       label={t("E-Mail*")}
                       className={classes.textField}
@@ -179,7 +188,9 @@ function Server({ history, notifications, ...props }) {
                   </Grid>
                   <Grid item xs={12} sm={4}>
                     <TextField
-                      error={Boolean(formNotFilledOut.length && !valuesServerData.mobile)}
+                      error={Boolean(
+                        formNotFilledOut.length && !valuesServerData.mobile
+                      )}
                       id="mobile"
                       label={t("Whatsapp-Nummer*")}
                       className={classes.textField}
@@ -259,11 +270,15 @@ function Server({ history, notifications, ...props }) {
             <StepLabel>{t("Bestätigung")}</StepLabel>
             <StepContent>
               <Typography variant="caption" paragraph>
+                {t(`Soeben wurde dieser QR-Code an die E-Mail-Adresse `)}
+                 <Box color="warning.dark" component="span" fontFamily="Monospace">{valuesServerData.email}</Box>
                 {t(
-                  "Soeben wurde dieser QR-Code an Ihre E-Mail-Adresse gesendet. Bitte halten Sie diesen QR-Code für die Anmeldung im Eingangsbereich bereit."
+                  ` gesendet. Bitte halten Sie diesen QR-Code für die Anmeldung im Eingangsbereich bereit.`
                 )}
               </Typography>
-              <div className={classes.actionsContainer}>{t("qrcode")}</div>
+              <Box display="flex" justifyContent="center">
+                <img src={valuesServerData.qrCodeImageData} alt="image"></img>
+              </Box>
             </StepContent>
           </Step>
         </Stepper>

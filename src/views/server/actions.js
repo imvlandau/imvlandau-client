@@ -28,13 +28,15 @@ export const provisionServer = (
       companion2,
       companion3,
       companion4
+    }, {
+      responseType: "blob"
     })
     .then(response => {
       dispatch({
         type: constants.DEPLOY_SERVER_SUCCESS
       });
       dispatch(removeNotifications());
-      // return response;
+      return URL.createObjectURL(response.data);
     })
     .catch(response => {
       dispatch({ type: constants.DEPLOY_SERVER_FAILURE });
