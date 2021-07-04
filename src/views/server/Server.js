@@ -88,9 +88,9 @@ function Server({ history, notifications, ...props }) {
           .then(qrCodeImageData => {
             setActiveStep(prevActiveStep => prevActiveStep + 1);
             props.addNotification({
-              key: "key_pair.success",
+              key: "attendees.registration.complete",
               message: t(
-                "Ihre Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach."
+                "attendees.registration.complete"
               ),
               type: "success"
             });
@@ -101,8 +101,8 @@ function Server({ history, notifications, ...props }) {
           });
       } else {
         props.addNotification({
-          key: "key_pair.agreement",
-          message: t("Sie müssen alle Pflichtfelder* ausfüllen."),
+          key: "attendees.form.incomplete",
+          message: t("notification.form.incomplete"),
           type: "error"
         });
       }
@@ -115,7 +115,7 @@ function Server({ history, notifications, ...props }) {
   };
 
   const formNotFilledOut = notifications.filter(notification => {
-    return notification.key.indexOf("key_pair.agreement") > -1;
+    return notification.key.indexOf("attendees.form.incomplete") > -1;
   });
 
   React.useEffect(() => {
@@ -129,29 +129,29 @@ function Server({ history, notifications, ...props }) {
 
   return (
     <React.Fragment>
-      <Helmet title="Server" />
+      <Helmet title={t("attendees.browser.title")} />
       <PmbSnackbar />
       <PmbNavBar showNewButtons={false} />
       <Container maxWidth="lg">
         <Typography className={classes.heading} component="h1" variant="h4">
-          {t("Eid al-Adha - 19.07.2021 - Sporthalle IGS Landau")}
+          {t("attendees.event.title")}
         </Typography>
         <Stepper
           className={classes.stepper}
           activeStep={activeStep}
           orientation="vertical"
         >
-          <Step key="server-settings">
-            <StepLabel>{t("Anmeldung")}</StepLabel>
+          <Step key="event-registration">
+            <StepLabel>{t("attendees.registration.section.name")}</StepLabel>
             <StepContent>
               <Typography variant="h6">
                 {t(
-                  "Hier können Sie sich und Ihre Angehörige für Eid al-Adha registrieren."
+                  "attendees.registration.section.title"
                 )}
               </Typography>
               <Typography variant="caption">
                 {t(
-                  "Bitte füllen Sie das folgende Formular aus. Im Anschluss senden wir Ihnen an die hier eingegebene E-Mail-Adresse einen QR-Code zu. Bitte bewahren Sie diesen gut auf und zeigen Sie diesen an der Anmdelung im Eingangsbereich um einen reibungslosen und schnellen Anmeldungsprozess zu ermöglichen."
+                  "attendees.registration.section.subtitle"
                 )}
               </Typography>
               <form noValidate autoComplete="off">
@@ -163,7 +163,7 @@ function Server({ history, notifications, ...props }) {
                       )}
                       autoFocus
                       id="name"
-                      label={t("Vor- und Nachname*")}
+                      label={t("label.pre.and.last.name") + "*"}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.name || ""}
@@ -177,7 +177,7 @@ function Server({ history, notifications, ...props }) {
                         formNotFilledOut.length && !valuesServerData.email
                       )}
                       id="email"
-                      label={t("E-Mail*")}
+                      label={t("label.email") + "*"}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.email || ""}
@@ -191,7 +191,7 @@ function Server({ history, notifications, ...props }) {
                         formNotFilledOut.length && !valuesServerData.mobile
                       )}
                       id="mobile"
-                      label={t("Whatsapp-Nummer*")}
+                      label={t("label.mobile") + "*"}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.mobile || ""}
@@ -204,13 +204,13 @@ function Server({ history, notifications, ...props }) {
                   variant="h6"
                   className={classes.headingServerSettings}
                 >
-                  {t("In Begleitung von...")}{" "}
+                  {t("attendees.companions.section.title")}
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("Person 1")}
+                      label={t("attendees.companions.label.first.companion")}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.companion1 || ""}
@@ -221,7 +221,7 @@ function Server({ history, notifications, ...props }) {
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("Person 2")}
+                      label={t("attendees.companions.label.second.companion")}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.companion2 || ""}
@@ -232,7 +232,7 @@ function Server({ history, notifications, ...props }) {
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("Person 3")}
+                      label={t("attendees.companions.label.third.companion")}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.companion3 || ""}
@@ -243,7 +243,7 @@ function Server({ history, notifications, ...props }) {
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("Person 4")}
+                      label={t("attendees.companions.label.fourth.companion")}
                       className={classes.textField}
                       fullWidth
                       value={valuesServerData.companion4 || ""}
@@ -265,14 +265,14 @@ function Server({ history, notifications, ...props }) {
               </div>
             </StepContent>
           </Step>
-          <Step key="choose-server">
-            <StepLabel>{t("Bestätigung")}</StepLabel>
+          <Step key="event-registration-confirmation">
+            <StepLabel>{t("attendees.confirmation.section.name")}</StepLabel>
             <StepContent>
               <Typography variant="caption" paragraph>
-                {t(`Soeben wurde dieser QR-Code an die E-Mail-Adresse `)}
+                {t(`attendees.confirmation.section.subtitle.beginning`)}
                  <Box color="warning.dark" component="span" fontFamily="Monospace">{valuesServerData.email}</Box>
                 {t(
-                  ` gesendet. Bitte halten Sie diesen QR-Code für die Anmeldung im Eingangsbereich bereit.`
+                  `attendees.confirmation.section.subtitle.end`
                 )}
               </Typography>
               <Box display="flex" justifyContent="center">
