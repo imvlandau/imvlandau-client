@@ -7,30 +7,16 @@ export const initialState = {
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case constants.ADD_NOTIFICATION: {
-      let foundInOldTheNewOne = state.notifications.filter(notification => {
-        let notfound = notification.key.indexOf(action.notification.key) === -1;
-        return notfound;
-      });
-      let newNotification = action.notification;
       return {
         ...state,
-        notifications: [...foundInOldTheNewOne, newNotification]
+        notifications: [action.notification]
       };
     }
 
     case constants.ADD_NOTIFICATIONS: {
-      // if the new notification was found in the current list, return cut this element out from current list
-      // get current list minus new notification
-      let foundInOldSomeOfTheNew = state.notifications.filter(notification => {
-        let found = action.notifications.find(newNotification => {
-          return notification.key === newNotification.key;
-        });
-        return !found;
-      });
-      let newNotifications = action.notifications;
       return {
         ...state,
-        notifications: [...foundInOldSomeOfTheNew, ...newNotifications]
+        notifications: action.notifications
       };
     }
 
