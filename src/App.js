@@ -74,12 +74,12 @@ function App() {
   return (
     <React.Fragment>
       <Helmet
-        titleTemplate="%s | Playmobox"
-        defaultTitle="Playmobox - web application editor"
+        titleTemplate="%s | IMV-Landau e. V."
+        defaultTitle="IMV-Landau e. V."
         meta={[
           {
             name: "description",
-            content: "Playmobox is a high-end web application editor"
+            content: "IMV-Landau e. V. - Islamischer multikultureller Verein Landau"
           }
         ]}
       />

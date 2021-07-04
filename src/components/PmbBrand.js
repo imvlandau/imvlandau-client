@@ -36,7 +36,7 @@ function PmbBrand({ rotating }) {
   return (
     <Typography color="inherit" variant="h6">
       <a className={classes.link} href={"/"}>
-        IMV-Landau e.V. - Islamischer multikultureller Verein Landau (الجمعية الاسلامية للثقافات المتعددة مسجد ابي بكر الصديق)
+        IMV-Landau e. V. - Islamischer multikultureller Verein Landau (الجمعية الاسلامية للثقافات المتعددة مسجد ابي بكر الصديق)
       </a>
     </Typography>
   );
