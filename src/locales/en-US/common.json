@@ -13,6 +13,7 @@
   "caption.nothing.selected": "Nothing selected",
   "caption.comming.soon": "Comming soon",
   "notification.form.incomplete": "You have to fill out all required fields.",
+  "label.token": "Token",
   "label.pre.and.last.name": "Pre and last name",
   "label.email": "E-Mail",
   "label.mobile": "Whatsapp number"

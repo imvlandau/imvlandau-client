@@ -12,5 +12,7 @@
   "attendees.companions.label.fourth.companion": "Companion 4",
   "attendees.confirmation.section.name": "Confirmation",
   "attendees.confirmation.section.subtitle.beginning": "We've sent this QR-Code to the E-Mail ",
-  "attendees.confirmation.section.subtitle.end": " Please be ready to show it at the entrance of this Event."
+  "attendees.confirmation.section.subtitle.end": " Please be ready to show it at the entrance of this Event.",
+  "attendees.has.been.scanned": "Has been scanned",
+  "attendees.no.attendees.registered.yet": "No attendees registered yet"
 }

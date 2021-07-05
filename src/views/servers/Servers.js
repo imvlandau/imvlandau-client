@@ -2,6 +2,7 @@ import React, { forwardRef, useRef } from "react";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -124,6 +125,7 @@ const sampleData = [
 function Servers({ servers: serversProps = [], ...props }) {
   const classes = useStyles();
   const theme = useTheme();
+  const { t } = useTranslation(["server"]);
   const didMountRef = useRef(false);
 
   const [servers, setServers] = React.useState(serversProps);
@@ -133,31 +135,31 @@ function Servers({ servers: serversProps = [], ...props }) {
       readonly: true,
       export: true,
       field: "token",
-      title: "Token"
+      title: t("label.token")
     },
     {
       readonly: true,
       export: true,
       field: "name",
-      title: "Name"
+      title: t("label.pre.and.last.name")
     },
     {
       readonly: true,
       export: true,
       field: "email",
-      title: "E-Mail"
+      title: t("label.email")
     },
     {
       readonly: true,
       export: true,
       field: "mobile",
-      title: "Mobile"
+      title: t("label.mobile")
     },
     {
       readonly: true,
       export: true,
       field: "companions",
-      title: "Companions",
+      title: t("attendees.companions.section.title"),
       render: rowData => (
         <React.Fragment>
           <Box display="flex">
@@ -187,7 +189,7 @@ function Servers({ servers: serversProps = [], ...props }) {
       readonly: true,
       export: false,
       field: "hasBeenScanned",
-      title: "Has been scanned",
+      title: t("attendees.has.been.scanned"),
       render: rowData => (
         <React.Fragment>
           {rowData.hasBeenScanned ? (
@@ -226,7 +228,7 @@ function Servers({ servers: serversProps = [], ...props }) {
               emptyDataSourceMessage: (
                 <React.Fragment>
                   <Typography variant="h4" color="primary" gutterBottom>
-                    No attendees registered
+                    {t("attendees.no.attendees.registered.yet")}
                   </Typography>
                 </React.Fragment>
               )
