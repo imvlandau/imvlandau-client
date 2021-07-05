@@ -116,7 +116,7 @@ const sampleData = [
     companion2: "Mohammed",
     companion3: "Amir",
     companion4: "Karim",
-    isScanned: true
+    hasBeenScanned: true
   }
 ];
 
@@ -186,11 +186,11 @@ function Servers({ servers: serversProps = [], ...props }) {
     {
       readonly: true,
       export: false,
-      field: "isScanned",
-      title: "Is already scanned",
+      field: "hasBeenScanned",
+      title: "Has been scanned",
       render: rowData => (
         <React.Fragment>
-          {rowData.isScanned ? (
+          {rowData.hasBeenScanned ? (
             <Box display="flex">yes</Box>
           ) : (
             <Box display="flex">no</Box>
