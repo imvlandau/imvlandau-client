@@ -281,6 +281,7 @@ function Servers({ servers: serversProps = [], ...props }) {
               downloadCsv(csvContent, csvFileName);
             },
             exportDelimiter: ";",
+            exportButton: { csv: true, pdf: true },
             pageSizeOptions: [5, 10, 50, 100, 300, 1000],
             pageSize: 10,
             padding: "dense",
