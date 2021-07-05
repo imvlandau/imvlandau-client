@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import clsx from "clsx";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
@@ -108,130 +108,92 @@ const tableIcons = {
 
 const sampleData = [
   {
-    label: "myClient",
-    operatingSystem: "Ubuntu 18.04",
-    operatingSystemIcon: FaUbuntu,
-    location: "Frankfurt",
-    locationCCA3: "DE",
-    charges: "$1.51",
-    running: true,
-    status: "Running",
-    ram: "1024MB",
-    ip: "192.0.2.3"
-  },
-  {
-    label: "myDatabase",
-    operatingSystem: "Ubuntu 18.04",
-    operatingSystemIcon: FaUbuntu,
-    location: "Ohio",
-    locationCCA3: "US",
-    charges: "$6.48",
-    running: true,
-    status: "Running",
-    ram: "4096MB",
-    ip: "192.0.2.2"
-  },
-  {
-    label: "myAPI",
-    operatingSystem: "Server 2019",
-    operatingSystemIcon: FaWindows,
-    location: "Paris",
-    locationCCA3: "FR",
-    charges: "$3.24",
-    running: true,
-    status: "Running",
-    ram: "2048MB",
-    ip: "192.0.2.1"
+    token: "12345",
+    name: "Sufian Abu-Rab",
+    email: "service@imv-landau.de",
+    mobile: "017612341234",
+    companion1: "Achmed",
+    companion2: "Mohammed",
+    companion3: "Amir",
+    companion4: "Karim",
+    isScanned: true
   }
 ];
 
 function Servers({ servers: serversProps = [], ...props }) {
   const classes = useStyles();
   const theme = useTheme();
-  const didMountRef = React.useRef(false);
+  const didMountRef = useRef(false);
 
   const [servers, setServers] = React.useState(serversProps);
 
   const columns = [
     {
       readonly: true,
-      field: "server",
-      title: "Server",
-      render: rowData => (
-        <React.Fragment>
-          <Typography variant="body2" gutterBottom>
-            {rowData.label}
-          </Typography>
-          <Typography display="block" variant="caption">
-            {rowData.ram} -
-            <Link to="#!" rel="noopener" className={classes.link}>
-              {rowData.ip}
-            </Link>
-          </Typography>
-        </React.Fragment>
-      )
+      export: true,
+      field: "token",
+      title: "Token"
     },
     {
       readonly: true,
-      field: "operatingSystem",
-      title: "OS",
+      export: true,
+      field: "name",
+      title: "Name"
+    },
+    {
+      readonly: true,
+      export: true,
+      field: "email",
+      title: "E-Mail"
+    },
+    {
+      readonly: true,
+      export: true,
+      field: "mobile",
+      title: "Mobile"
+    },
+    {
+      readonly: true,
+      export: true,
+      field: "companions",
+      title: "Companions",
       render: rowData => (
         <React.Fragment>
-          <Box display="flex" alignItems="center">
-            {
-              <rowData.operatingSystemIcon
-                className={classes.operatingSystemIcon}
-              />
-            }
-            {rowData.operatingSystem}
+          <Box display="flex">
+            {rowData.companion1 && (
+              <React.Fragment>{rowData.companion1}</React.Fragment>
+            )}
+            {rowData.companion1 && rowData.companion2 ? (
+              <React.Fragment>, {rowData.companion2}</React.Fragment>
+            ) : rowData.companion2 ? (
+              <React.Fragment>{rowData.companion2}</React.Fragment>
+            ) : null}
+            {rowData.companion2 && rowData.companion3 ? (
+              <React.Fragment>, {rowData.companion3}</React.Fragment>
+            ) : rowData.companion3 ? (
+              <React.Fragment>{rowData.companion3}</React.Fragment>
+            ) : null}
+            {rowData.companion3 && rowData.companion4 ? (
+              <React.Fragment>, {rowData.companion4}</React.Fragment>
+            ) : rowData.companion4 ? (
+              <React.Fragment>{rowData.companion4}</React.Fragment>
+            ) : null}
           </Box>
         </React.Fragment>
       )
     },
     {
       readonly: true,
-      field: "location",
-      title: "Location",
+      export: false,
+      field: "isScanned",
+      title: "Is already scanned",
       render: rowData => (
         <React.Fragment>
-          <Box display="flex" alignItems="center">
-            <PmbFlag
-              alt={`Flag of ${rowData.location}`}
-              format="png"
-              name={rowData.locationCCA3}
-              pngSize={32}
-              shiny={true}
-              className={classes.flagIcon}
-            />
-            {rowData.location}
-          </Box>
-        </React.Fragment>
-      )
-    },
-    {
-      readonly: true,
-      field: "charges",
-      title: "Charges"
-    },
-    {
-      readonly: true,
-      field: "status",
-      title: "Status",
-      render: rowData => (
-        <React.Fragment>
-          <Box
-            display="flex"
-            alignItems="center"
-            className={clsx(classes.status, {
-              [classes.running]: rowData.running
-            })}
-          >
-            <FiberManualRecordIcon
-              className={classes.statusIcon}
-              fontSize="small"
-            />
-            {rowData.status}
-          </Box>
+          {rowData.isScanned ? (
+            <Box display="flex">yes</Box>
+          ) : (
+            <Box display="flex">no</Box>
+          )}
         </React.Fragment>
       )
     }
@@ -240,7 +202,7 @@ function Servers({ servers: serversProps = [], ...props }) {
   React.useEffect(() => {
     if (!didMountRef.current) {
       // mounted
-      props.getServers();
+      props.fetchServers();
       didMountRef.current = true;
     } else {
       // updated
@@ -252,10 +214,10 @@ function Servers({ servers: serversProps = [], ...props }) {
     <React.Fragment>
       <Helmet title="Servers" />
       <PmbSnackbar />
-      <PmbNavBar />
+      <PmbNavBar showNewButtons={false} />
       <Container maxWidth="lg">
         <Typography className={classes.heading} component="h1" variant="h4">
-          Servers
+          Registrierungen - Eid al-Adha - Montag - 19.07.2021
         </Typography>
         <MaterialTable
           localization={{
@@ -263,36 +225,17 @@ function Servers({ servers: serversProps = [], ...props }) {
               emptyDataSourceMessage: (
                 <React.Fragment>
                   <Typography variant="h4" color="primary" gutterBottom>
-                    No servers created
+                    No attendees registered
                   </Typography>
-                  <Link to={"/server"} rel="noopener" className={classes.link}>
-                    <Card className={classes.card}>
-                      <CardActionArea>
-                        <CardContent>
-                          <IconButton
-                            component="span"
-                            aria-label="Deploy server"
-                          >
-                            <Add className={classes.addIcon} fontSize="large" />
-                          </IconButton>
-                          <Typography component="h5" variant="h5">
-                            Deploy new server
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Link>
                 </React.Fragment>
               )
             }
           }}
-          actions={[
-            rowData => ({
-              icon: () => <MoreHorizIcon />
-            })
-          ]}
           options={{
-            actionsColumnIndex: 5,
+            exportButton: { csv: false, pdf: true },
+            pageSizeOptions: [5, 10, 50, 100, 300, 1000],
+            pageSize: 10,
+            padding: "dense",
             searchFieldAlignment: "left",
             searchFieldStyle: {
               marginLeft: theme.spacing(-3)
@@ -301,7 +244,7 @@ function Servers({ servers: serversProps = [], ...props }) {
           icons={tableIcons}
           title=""
           columns={columns}
-          data={servers || sampleData}
+          data={serversProps || sampleData}
         />
         <PmbFooter showDivider />
       </Container>
@@ -310,7 +253,7 @@ function Servers({ servers: serversProps = [], ...props }) {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  servers: state.server.servers
+  servers: state.servers.data
 });
 
 export default connect(
