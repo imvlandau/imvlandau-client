@@ -53,7 +53,7 @@ function PmbNavBar({ showNewButtons = true, showProfileMenu = true }) {
             languages={[
               { lacc: "en-US", cca2: "US", cca3: "USA" },
               { lacc: "de-DE", cca2: "DE", cca3: "DEU" },
-              { lacc: "ru-RU", cca2: "RU", cca3: "RUS" }
+              { lacc: "ar-PS", cca2: "PS", cca3: "PSE" }
             ]}
           />
         </Hidden>
