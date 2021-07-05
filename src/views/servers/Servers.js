@@ -120,10 +120,23 @@ const sampleData = [
   }
 ];
 
+const downloadCsv = (data, fileName) => {
+  const finalFileName = fileName.endsWith(".csv")
+    ? fileName
+    : `${fileName}.csv`;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([data], { type: "text/csv" }));
+  a.setAttribute("download", finalFileName);
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+};
+
 function Servers({ servers: serversProps = [], ...props }) {
   const classes = useStyles();
   const theme = useTheme();
   const didMountRef = useRef(false);
+  const tableRef = useRef();
 
   const [servers, setServers] = React.useState(serversProps);
 
@@ -220,6 +233,7 @@ function Servers({ servers: serversProps = [], ...props }) {
           Registrierungen - Eid al-Adha - Montag - 19.07.2021
         </Typography>
         <MaterialTable
+          tableRef={tableRef}
           localization={{
             body: {
               emptyDataSourceMessage: (
@@ -233,6 +247,40 @@ function Servers({ servers: serversProps = [], ...props }) {
           }}
           options={{
             exportButton: { csv: false, pdf: true },
+            exportCsv: (columns, data) => {
+              // Turn headers into array of strings
+              const headerRow = columns.map(col => {
+                if (typeof col.title === "object") {
+                  // I am not sure what props the Translate component exposes
+                  // but you would need to change `text` in `col.title.props.text`
+                  // to whatever prop you need.
+                  return col.title.props.text;
+                }
+                return col.title;
+              });
+
+              // Turn data into an array of string arrays, without the `tableData` prop
+              const dataRows = data.map(({ tableData, ...row }) => {
+                return Object.values(row);
+              });
+
+              // Aggregate header data and 'body' data
+              // Mirror default export behavior by joining data via
+              // the delimiter specified within material table (by default comma delimited)
+              const { exportDelimiter } = tableRef.current.props.options;
+              const delimiter = exportDelimiter ? exportDelimiter : ",";
+              const csvContent = [headerRow, ...dataRows]
+                .map(e => e.join(delimiter))
+                .join("\n");
+
+              // This mirrors the default export behavior where the
+              // exported file name is the table title.
+              const csvFileName = tableRef.current.props.title;
+
+              // Allow user to download file as .csv
+              downloadCsv(csvContent, csvFileName);
+            },
+            exportDelimiter: ";",
             pageSizeOptions: [5, 10, 50, 100, 300, 1000],
             pageSize: 10,
             padding: "dense",
