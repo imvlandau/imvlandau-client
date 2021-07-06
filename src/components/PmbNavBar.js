@@ -48,15 +48,13 @@ function PmbNavBar({ showNewButtons = true, showProfileMenu = true }) {
         )}
         <div className={classes.divider} />
         {showProfileMenu && <PmbProfileMenu />}
-        <Hidden xsDown>
-          <PmbLanguageDropdown
-            languages={[
-              { lacc: "en-US", cca2: "US", cca3: "USA" },
-              { lacc: "de-DE", cca2: "DE", cca3: "DEU" },
-              { lacc: "ar-PS", cca2: "PS", cca3: "PSE" }
-            ]}
-          />
-        </Hidden>
+        <PmbLanguageDropdown
+          languages={[
+            { lacc: "en-US", cca2: "US", cca3: "USA" },
+            { lacc: "de-DE", cca2: "DE", cca3: "DEU" },
+            { lacc: "ar-PS", cca2: "PS", cca3: "PSE" }
+          ]}
+        />
       </Toolbar>
     </AppBar>
   );
