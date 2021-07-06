@@ -88,7 +88,7 @@ function App() {
           <CssBaseline />
           <Switch>
             <Route exact path={"/"} component={Server} />
-            <Route exact path={"/servers"} component={Servers} />
+            <PrivateRoute exact path={"/servers"} component={Servers} />
             <PrivateRoute exact path="/profile" component={Profile} />
           </Switch>
         </MuiThemeProvider>

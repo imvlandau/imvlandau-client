@@ -141,14 +141,19 @@ export default function PmbProfileMenu() {
             primary={`${t("button.label.signed.in.as")} ${user.nickname}`}
           />
         </StyledMenuItem>
+{/*
         <StyledMenuItem component={Link} to="/profile">
           <ListItemIcon>
             <PersonIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary={t("button.label.your.profile")} />
         </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemText inset primary="Drafts" />
+*/}
+        <StyledMenuItem component={Link} to="/servers">
+          <ListItemIcon>
+            <PersonIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary={t("button.label.attendees")} />
         </StyledMenuItem>
         <Divider />
         <StyledMenuItem onClick={handleLogout}>
