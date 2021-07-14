@@ -220,7 +220,7 @@ function Servers({ servers: serversProps = [], ...props }) {
       <PmbNavBar showNewButtons={false} />
       <Container maxWidth="lg">
         <Typography className={classes.heading} component="h1" variant="h4">
-          Registrierungen - Eid al-Adha - Montag - 19.07.2021
+          {t("attendees.registration.title")}
         </Typography>
         <MaterialTable
           localization={{
