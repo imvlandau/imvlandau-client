@@ -5,7 +5,9 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
+import { orange } from '@material-ui/core/colors';
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -42,10 +44,14 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1)
+  },
+  buttonProgress: {
+    marginLeft: theme.spacing(1),
+    color: orange[500]
   }
 }));
 
-function Server({ history, notifications, ...props }) {
+function Server({ history, notifications, fetching, ...props }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation(["server"]);
@@ -125,7 +131,7 @@ function Server({ history, notifications, ...props }) {
     } else {
       // updated
     }
-  }, []);
+  }, [fetching]);
 
   return (
     <React.Fragment>
@@ -259,8 +265,9 @@ function Server({ history, notifications, ...props }) {
                   color="primary"
                   onClick={handleNext}
                   className={classes.buttonStepper}
+                  disabled={fetching}
                 >
-                  {t("button.next")}
+                  {t("button.next")}{fetching && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </Button>
               </div>
             </StepContent>
@@ -288,7 +295,8 @@ function Server({ history, notifications, ...props }) {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  notifications: state.toastr.notifications
+  notifications: state.toastr.notifications,
+  fetching: state.server.fetching
 });
 
 export default connect(
