@@ -18,5 +18,6 @@
   "label.token": "Token",
   "label.pre.and.last.name": "Pre and last name",
   "label.email": "E-Mail",
-  "label.mobile": "Whatsapp number"
+  "label.mobile": "Whatsapp number",
+  "label.actions": "Actions"
 }

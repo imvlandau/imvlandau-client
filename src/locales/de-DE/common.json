@@ -18,5 +18,6 @@
   "label.token": "Kennung",
   "label.pre.and.last.name": "Vor- und Nachname",
   "label.email": "E-Mail",
-  "label.mobile": "Whatsapp-Nummer"
+  "label.mobile": "Whatsapp-Nummer",
+  "label.actions": "Aktionen"
 }

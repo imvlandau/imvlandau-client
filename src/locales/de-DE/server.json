@@ -15,5 +15,7 @@
   "attendees.confirmation.section.subtitle.beginning": "Soeben wurde dieser QR-Code an die E-Mail-Adresse ",
   "attendees.confirmation.section.subtitle.end": " gesendet. Bitte halten Sie diesen QR-Code für die Anmeldung im Eingangsbereich bereit.",
   "attendees.has.been.scanned": "Wurde bereits gescannt",
-  "attendees.no.attendees.registered.yet": "Keine Registrierungen vorhanden"
+  "attendees.no.attendees.registered.yet": "Keine Registrierungen vorhanden",
+  "attendees.delete.tooltip": "Teilnehmer austragen",
+  "attendees.delete.dialog.message": "Möchten sie wirklich den folgenden Teilnehmer aus der Liste entfernen: "
 }

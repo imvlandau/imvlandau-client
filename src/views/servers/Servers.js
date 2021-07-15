@@ -232,6 +232,9 @@ function Servers({ servers: serversProps = [], ...props }) {
                   </Typography>
                 </React.Fragment>
               )
+            },
+            header: {
+                actions: t("label.actions")
             }
           }}
           options={{
@@ -249,9 +252,9 @@ function Servers({ servers: serversProps = [], ...props }) {
           actions={[
             rowData => ({
               icon: tableIcons.Delete,
-              tooltip: 'Delete attendee',
+              tooltip: t("attendees.delete.tooltip"),
               onClick: (event, rowData) => {
-                if(confirm("Do you really want to delete this entry " + rowData.name)) {
+                if(confirm(t("attendees.delete.dialog.message") + rowData.name)) {
                   props.deleteAttendee(rowData.id);
                 }
               }
