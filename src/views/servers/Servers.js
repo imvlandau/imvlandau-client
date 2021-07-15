@@ -242,9 +242,21 @@ function Servers({ servers: serversProps = [], ...props }) {
             searchFieldAlignment: "left",
             searchFieldStyle: {
               marginLeft: theme.spacing(-3)
-            }
+            },
+            actionsColumnIndex: -1
           }}
           icons={tableIcons}
+          actions={[
+            rowData => ({
+              icon: tableIcons.Delete,
+              tooltip: 'Delete attendee',
+              onClick: (event, rowData) => {
+                if(confirm("Do you really want to delete this entry " + rowData.name)) {
+                  props.deleteAttendee(rowData.id);
+                }
+              }
+            })
+          ]}
           title=""
           columns={columns}
           data={serversProps || sampleData}

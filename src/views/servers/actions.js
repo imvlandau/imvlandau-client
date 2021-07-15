@@ -18,3 +18,20 @@ export const fetchServers = () => (dispatch, getState) => {
       return new Promise(() => {});
     });
 };
+
+export const deleteAttendee = (id) => (dispatch, getState) => {
+  dispatch({ type: constants.DELETE_ATTENDEE_REQUEST });
+  return axiosInstance
+    .delete(`/api/attendees/delete/${id}`)
+    .then(response => {
+      dispatch({
+        type: constants.DELETE_ATTENDEE_SUCCESS,
+        id
+      });
+      dispatch(removeNotifications());
+    })
+    .catch(response => {
+      dispatch({ type: constants.DELETE_ATTENDEE_FAILURE });
+      return new Promise(() => {});
+    });
+};
