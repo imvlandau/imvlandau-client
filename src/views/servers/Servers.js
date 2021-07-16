@@ -122,7 +122,7 @@ const sampleData = [
 ];
 
 
-function Servers({ servers: serversProps = [], ...props }) {
+function Servers({ servers: serversProps = [], fetching, ...props }) {
   const classes = useStyles();
   const theme = useTheme();
   const { t } = useTranslation(["server"]);
@@ -203,7 +203,7 @@ function Servers({ servers: serversProps = [], ...props }) {
       // updated
       setServers(serversProps);
     }
-  }, [servers]);
+  }, [servers, fetching]);
 
   return (
     <React.Fragment>
@@ -215,6 +215,7 @@ function Servers({ servers: serversProps = [], ...props }) {
           {t("attendees.registration.title")}
         </Typography>
         <MaterialTable
+          isLoading={fetching}
           localization={{
             body: {
               emptyDataSourceMessage: (
@@ -259,7 +260,8 @@ function Servers({ servers: serversProps = [], ...props }) {
             onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
               return new Promise((resolve, reject) => {
                 if (columnDef.field == "hasBeenScanned" && oldValue !== newValue) {
-                  props.setHasBeenScanned(rowData.id, newValue).then(resolve);
+                  props.setHasBeenScanned(rowData.id, newValue);
+                  resolve();
                 } else {
                   resolve();
                 }
@@ -274,7 +276,8 @@ function Servers({ servers: serversProps = [], ...props }) {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  servers: state.servers.data
+  servers: state.servers.data,
+  fetching: state.servers.fetching
 });
 
 export default connect(
