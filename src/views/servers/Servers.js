@@ -157,7 +157,7 @@ function Servers({ servers: serversProps = [], fetching, ...props }) {
     },
     {
       readonly: true,
-      export: true,
+      export: false,
       field: "companions",
       title: t("attendees.companions.section.title"),
       render: rowData => (
@@ -186,8 +186,37 @@ function Servers({ servers: serversProps = [], fetching, ...props }) {
       )
     },
     {
+      readonly: true,
+      title: t("attendees.companions.section.title.abbr"),
+      hidden: true,
+      export: true,
+      field: "companion1",
+      width: 50
+    },
+    {
+      readonly: true,
+      hidden: true,
+      export: true,
+      field: "companion2",
+      width: 50
+    },
+    {
+      readonly: true,
+      hidden: true,
+      export: true,
+      field: "companion3",
+      width: 50
+    },
+    {
+      readonly: true,
+      hidden: true,
+      export: true,
+      field: "companion4",
+      width: 50
+    },
+    {
       readonly: false,
-      export: false,
+      export: true,
       field: "hasBeenScanned",
       title: t("attendees.has.been.scanned"),
       lookup: { false: 'no', true: 'yes' }

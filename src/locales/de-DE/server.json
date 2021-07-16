@@ -7,6 +7,7 @@
   "attendees.registration.section.subtitle": "Bitte füllen Sie das folgende Formular aus. Im Anschluss senden wir Ihnen an die hier eingegebene E-Mail-Adresse einen QR-Code zu. Bitte bewahren Sie diesen gut auf und zeigen Sie diesen an der Anmdelung im Eingangsbereich um einen reibungslosen und schnellen Anmeldungsprozess zu ermöglichen.",
   "attendees.registration.complete": "Ihre Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach.",
   "attendees.companions.section.title": "In Begleitung von...",
+  "attendees.companions.section.title.abbr": "Begl.",
   "attendees.companions.label.first.companion": "Person 1",
   "attendees.companions.label.second.companion": "Person 2",
   "attendees.companions.label.third.companion": "Person 3",

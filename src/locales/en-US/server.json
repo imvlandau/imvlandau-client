@@ -7,6 +7,7 @@
   "attendees.registration.section.subtitle": "Just fill out this formular. Afterwards we will send a QR-Code to your E-Mail. Please keep this QR-Code ready and be prepared to show it at the entrance in order to speed up the registration process.",
   "attendees.registration.complete": "Registration complete. You should soon receive an E-Mail from us.",
   "attendees.companions.section.title": "Accompanied by...",
+  "attendees.companions.section.title.abbr": "Acc.",
   "attendees.companions.label.first.companion": "Companion 1",
   "attendees.companions.label.second.companion": "Companion 2",
   "attendees.companions.label.third.companion": "Companion 3",
