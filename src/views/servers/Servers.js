@@ -186,19 +186,11 @@ function Servers({ servers: serversProps = [], ...props }) {
       )
     },
     {
-      readonly: true,
+      readonly: false,
       export: false,
       field: "hasBeenScanned",
       title: t("attendees.has.been.scanned"),
-      render: rowData => (
-        <React.Fragment>
-          {rowData.hasBeenScanned ? (
-            <Box display="flex">yes</Box>
-          ) : (
-            <Box display="flex">no</Box>
-          )}
-        </React.Fragment>
-      )
+      lookup: { false: 'no', true: 'yes' }
     }
   ];
 
@@ -263,6 +255,17 @@ function Servers({ servers: serversProps = [], ...props }) {
           title=""
           columns={columns}
           data={serversProps || sampleData}
+          cellEditable={{
+            onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+              return new Promise((resolve, reject) => {
+                if (columnDef.field == "hasBeenScanned" && oldValue !== newValue) {
+                  props.setHasBeenScanned(rowData.id, newValue).then(resolve);
+                } else {
+                  resolve();
+                }
+              });
+            }
+          }}
         />
         <PmbFooter showDivider />
       </Container>

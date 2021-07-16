@@ -1,6 +1,32 @@
 import { axiosInstance } from "../../instances";
-import { addNotifications } from "../../helpers";
+import { addNotifications, removeNotifications } from "../../helpers";
 import * as constants from "./constants";
+
+export const setHasBeenScanned = (
+  id,
+  hasBeenScanned
+) => (dispatch, getState) => {
+  dispatch({ type: constants.SET_HAS_BEEN_SCANNED_REQUEST });
+  return axiosInstance
+    .post(
+      `/api/attendees/${id}/setHasBeenScanned`,
+      {
+        hasBeenScanned
+      }
+    )
+    .then(response => {
+      dispatch({
+        type: constants.SET_HAS_BEEN_SCANNED_SUCCESS,
+        data: response.data
+      });
+      dispatch(removeNotifications());
+      return response;
+    })
+    .catch(response => {
+      dispatch({ type: constants.SET_HAS_BEEN_SCANNED_FAILURE });
+      return new Promise(() => {});
+    });
+};
 
 export const fetchServers = () => (dispatch, getState) => {
   dispatch({ type: constants.FETCH_SERVERS_REQUEST });
