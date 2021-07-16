@@ -215,6 +215,7 @@ function Servers({ servers: serversProps = [], fetching, ...props }) {
       width: 50
     },
     {
+      defaultSort: 'asc',
       readonly: false,
       export: true,
       field: "hasBeenScanned",
@@ -260,6 +261,7 @@ function Servers({ servers: serversProps = [], fetching, ...props }) {
             }
           }}
           options={{
+            sorting: true,
             exportButton: { csv: false, pdf: true },
             pageSizeOptions: [5, 10, 50, 100, 300, 1000],
             pageSize: 10,
