@@ -82,7 +82,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-.remote-sync.json
+.remote-sync.*json
 
 public/locales
 github_ssh_key_imvlandau.pem
