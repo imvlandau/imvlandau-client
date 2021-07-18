@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { i18nextInstance } from "./instances";
+import { I18nextProvider } from "react-i18next";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <I18nextProvider i18n={i18nextInstance}>
+        <App />
+      </I18nextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
