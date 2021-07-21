@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from "react-redux";
+import configureStore from "./configureStore";
 import { i18nextInstance } from "./instances";
 import { I18nextProvider } from "react-i18next";
 import './index.css';
@@ -8,9 +10,11 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-      <I18nextProvider i18n={i18nextInstance}>
-        <App />
-      </I18nextProvider>
+    <Provider store={store}>
+        <I18nextProvider i18n={i18nextInstance}>
+          <App />
+        </I18nextProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
