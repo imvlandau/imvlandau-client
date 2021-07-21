@@ -18,7 +18,7 @@ axiosInstance.interceptors.response.use(
   },
   error => {
     if (error.response && error.response.data) {
-      if (error.response.data.exception || error.response.data.exception) {
+      if (error.response.data.message || error.response.data.exception) {
         console.group("[PMB]");
         error.response.data.message &&
           console.error(error.response.data.message);
