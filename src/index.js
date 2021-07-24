@@ -2,17 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import configureStore from "./configureStore";
-import { i18nextInstance } from "./instances";
+import i18nextInstance from "./i18nextInstance";
 import { I18nextProvider } from "react-i18next";
 import './index.css';
-import App from './App';
+import Participants from './pages/Participants';
 import reportWebVitals from './reportWebVitals';
+
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
         <I18nextProvider i18n={i18nextInstance}>
-          <App />
+          <Participants />
         </I18nextProvider>
     </Provider>
   </React.StrictMode>,
