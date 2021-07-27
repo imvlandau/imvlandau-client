@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import {
   reducer as notificationsReducer,
   initialState as notifications
-} from "./containers/PmbSnackbar";
+} from "./containers/Notifications";
 import {
   reducer as participantsReducer,
   initialState as participants

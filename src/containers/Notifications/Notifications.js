@@ -41,7 +41,7 @@ const CloseButton = ({ className, closeToast, ...props }) => (
   </Button>
 );
 
-function PmbSnackbar({ options, notifications, ...props }) {
+function Notifications({ options, notifications, ...props }) {
   const classes = useStyles();
   const didMountRef = React.useRef(false);
 
@@ -92,7 +92,7 @@ function PmbSnackbar({ options, notifications, ...props }) {
   );
 }
 
-PmbSnackbar.defaultProps = {
+Notifications.defaultProps = {
   options: {
     position: "top-right",
     autoClose: false,
@@ -104,7 +104,7 @@ PmbSnackbar.defaultProps = {
   }
 };
 
-PmbSnackbar.propTypes = {
+Notifications.propTypes = {
   notifications: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string,
@@ -120,4 +120,4 @@ const mapStateToProps = (state, ownProps) => ({
   notifications: state.notifications.notifications
 });
 
-export default connect(mapStateToProps)(PmbSnackbar);
+export default connect(mapStateToProps)(Notifications);

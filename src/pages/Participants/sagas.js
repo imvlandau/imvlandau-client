@@ -2,7 +2,7 @@ import { put, takeLatest, call } from "redux-saga/effects";
 import { fetchParticipantsSuccess, fetchParticipantsFailure } from "./actions";
 import { FETCH_PARTICIPANTS_REQUEST } from "./constants";
 import ParticipantsService from "./service";
-import { addNotification } from "../../containers/PmbSnackbar";
+import { addNotification } from "../../containers/Notifications";
 
 function* onLoadParticipants() {
   try {
