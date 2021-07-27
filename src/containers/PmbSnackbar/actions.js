@@ -1,28 +1,40 @@
 import * as constants from "./constants";
 
-export const addNotification = notification => (dispatch, getState) => {
-  if (typeof notify === "string") {
-    notification = {
-      key: notification,
-      message: notification,
-      type: "error",
-      toastId: new Date().getTime() + Math.random()
+export const addNotification = notification => {
+  if (typeof notification === "string") {
+    return {
+      type: constants.ADD_NOTIFICATION,
+      notification: {
+        key: notification,
+        message: notification,
+        type: "error",
+        toastId: new Date().getTime() + Math.random()
+      }
     };
   } else {
-    notification = {
-      key: notification.key || notification.message,
-      message: notification.message,
-      type: notification.type === "about:blank" ? "error" : notification.type,
-      toastId: new Date().getTime() + Math.random()
+    return {
+      type: constants.ADD_NOTIFICATION,
+      notification: {
+        key: notification.key || notification.message,
+        message:
+          (notification.response &&
+            notification.response.data &&
+            notification.response.data.message) ||
+          notification.message,
+        type:
+          notification.type ||
+          (notification.response &&
+            notification.response.data &&
+            notification.response.data.type === "about:blank")
+            ? "error"
+            : notification.type,
+        toastId: new Date().getTime() + Math.random()
+      }
     };
   }
-  return dispatch({
-    type: constants.ADD_NOTIFICATION,
-    notification
-  });
 };
 
-export const addNotifications = notifications => (dispatch, getState) => {
+export const addNotifications = notifications => {
   let notificationsTmp = [];
   for (var key in notifications) {
     notificationsTmp.push({
@@ -32,16 +44,17 @@ export const addNotifications = notifications => (dispatch, getState) => {
       toastId: new Date().getTime() + Math.random()
     });
   }
-  return dispatch({
+  return {
     type: constants.ADD_NOTIFICATIONS,
     notifications: notificationsTmp
-  });
+  };
 };
 
-export const removeNotification = key => (dispatch, getState) => {
-  return dispatch({ type: constants.REMOVE_NOTIFICATION, key });
-};
+export const removeNotification = key => ({
+  type: constants.REMOVE_NOTIFICATION,
+  key
+});
 
-export const removeNotifications = () => (dispatch, getState) => {
-  return dispatch({ type: constants.REMOVE_NOTIFICATIONS });
-};
+export const removeNotifications = () => ({
+  type: constants.REMOVE_NOTIFICATIONS
+});

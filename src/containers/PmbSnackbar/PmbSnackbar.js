@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { useTranslation } from "react-i18next";
+import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
 import EventListener from "react-event-listener";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,11 +11,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "auto",
     maxWidth: "33vw",
-    [theme.breakpoints.down(480)]: {
-      width: "100vw",
+    [theme.breakpoints.down('sm')]: {
+      width: "94.5vw",
       maxWidth: "none"
     },
-    [theme.breakpoints.up(480)]: {
+    [theme.breakpoints.up('sm')]: {
       maxWidth: "66vw"
     }
   },
@@ -36,17 +35,15 @@ const CloseButton = ({ className, closeToast, ...props }) => (
     variant="outlined"
     onClick={closeToast}
     className={className}
+    color='inherit'
   >
     Close
   </Button>
 );
 
-function PmbSnackbar({ options, notifications: notificationsProps, ...props }) {
+function PmbSnackbar({ options, notifications, ...props }) {
   const classes = useStyles();
-  const theme = useTheme();
-  const { t } = useTranslation(["server"]);
   const didMountRef = React.useRef(false);
-  const [notifications, setNotifications] = React.useState(notificationsProps);
 
   const handleCloseAll = () => {
     toast.dismiss();
@@ -64,17 +61,13 @@ function PmbSnackbar({ options, notifications: notificationsProps, ...props }) {
       // mounted
       didMountRef.current = true;
     } else {
-      // updated
-      setNotifications(notificationsProps);
-
       for (let notification of notifications) {
         toast.dismiss(notification.toastId);
       }
 
-      for (let notification of notificationsProps) {
+      for (let notification of notifications) {
         toast(notification.message, {
           closeButton: <CloseButton />,
-          style: classes.root,
           toastId: notification.toastId,
           type: notification.type,
           autoClose:
@@ -84,7 +77,7 @@ function PmbSnackbar({ options, notifications: notificationsProps, ...props }) {
         });
       }
     }
-  }, [notificationsProps]);
+  }, [notifications, options]);
 
   return (
     <React.Fragment>
@@ -124,7 +117,7 @@ PmbSnackbar.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  notifications: state.toastr.notifications
+  notifications: state.notifications.notifications
 });
 
 export default connect(mapStateToProps)(PmbSnackbar);

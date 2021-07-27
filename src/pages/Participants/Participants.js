@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
+import PmbSnackbar from "../../containers/PmbSnackbar";
 
 function Participants({ ...props }) {
   const didMountRef = useRef(false);
@@ -17,6 +18,7 @@ function Participants({ ...props }) {
 
   return (
     <React.Fragment>
+      <PmbSnackbar />
       test
     </React.Fragment>
   );

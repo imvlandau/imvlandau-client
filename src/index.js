@@ -5,7 +5,7 @@ import configureStore from "./configureStore";
 import i18nextInstance from "./i18nextInstance";
 import { I18nextProvider } from "react-i18next";
 import './index.css';
-import Participants from './pages/Participants';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const store = configureStore();
@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
         <I18nextProvider i18n={i18nextInstance}>
-          <Participants />
+          <App />
         </I18nextProvider>
     </Provider>
   </React.StrictMode>,

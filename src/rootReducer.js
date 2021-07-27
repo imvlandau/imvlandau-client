@@ -1,13 +1,19 @@
 import { combineReducers } from "redux";
 import {
+  reducer as notificationsReducer,
+  initialState as notifications
+} from "./containers/PmbSnackbar";
+import {
   reducer as participantsReducer,
-  initialState as participantsInitialState
+  initialState as participants
 } from "./pages/Participants";
 
 export default combineReducers({
-  participantsInitialState: participantsReducer
+  notifications: notificationsReducer,
+  participants: participantsReducer
 });
 
 export const initialStates = {
-  participantsInitialState
+  notifications,
+  participants
 };
