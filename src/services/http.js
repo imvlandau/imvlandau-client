@@ -5,8 +5,7 @@ const instance = axios.create({
   baseURL: BASE_URL
 });
 
-/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
-export default {
+const http = {
   get: instance.get,
   post: instance.post,
   put: instance.put,
@@ -17,3 +16,5 @@ export default {
   },
   instance
 };
+
+export default http;
