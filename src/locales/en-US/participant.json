@@ -1,0 +1,22 @@
+{
+  "attendees.browser.title": "Event",
+  "attendees.event.title": "Eid al-Adha - Tuesday - 2021-07-20 - Abu Bakr Moschee - Danziger Platz 14 - Landau",
+  "attendees.registration.title":"Registration - Eid al-Adha - Tuesday - 2021-07-20",
+  "attendees.registration.section.name": "Registration",
+  "attendees.registration.section.title": "Here you can register yourself and your companions for Eid al-Adha.",
+  "attendees.registration.section.subtitle": "Just fill out this formular. Afterwards we will send a QR-Code to your E-Mail. Please keep this QR-Code ready and be prepared to show it at the entrance in order to speed up the registration process.",
+  "attendees.registration.complete": "Registration complete. You should soon receive an E-Mail from us.",
+  "attendees.companions.section.title": "Accompanied by...",
+  "attendees.companions.section.title.abbr": "Acc.",
+  "attendees.companions.label.first.companion": "Companion 1",
+  "attendees.companions.label.second.companion": "Companion 2",
+  "attendees.companions.label.third.companion": "Companion 3",
+  "attendees.companions.label.fourth.companion": "Companion 4",
+  "attendees.confirmation.section.name": "Confirmation",
+  "attendees.confirmation.section.subtitle.beginning": "We've sent this QR-Code to the E-Mail ",
+  "attendees.confirmation.section.subtitle.end": " Please be ready to show it at the entrance of this Event.",
+  "attendees.has.been.scanned": "Has been scanned",
+  "attendees.no.attendees.registered.yet": "No attendees registered yet",
+  "attendees.delete.tooltip": "Delete attendees",
+  "attendees.delete.dialog.message": "Do you really want to exclude the following participant from this list: "
+}

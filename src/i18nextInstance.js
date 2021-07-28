@@ -32,7 +32,7 @@ i18nextInstance
         }
       },
       react: {
-        useSuspense: true
+        useSuspense: false
       },
 
       ns: ["common"],
