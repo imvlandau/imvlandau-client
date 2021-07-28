@@ -13,7 +13,7 @@ i18nextInstance
   .use(initReactI18next) // passes i18n down to react-i18next
   .init(
     {
-      fallbackLng: "en-US",
+      fallbackLng: "de-DE",
       load: "currentOnly",
       order: [
         "querystring",
