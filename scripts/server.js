@@ -4,7 +4,6 @@ const path = require("path");
 const http = require("http");
 const https = require("https");
 const fs = require("fs");
-const helmet = require("helmet");
 const paths = require("../config/paths");
 const i18next = require("../config/imv-i18next-resource-bundler");
 const buildFolder = path.relative(process.cwd(), paths.appBuild);
@@ -24,7 +23,6 @@ const sslOptions = process.env.HTTPS === "true" && {
   )
 };
 
-app.use(helmet());
 
 // Pass API-Requests to backend
 app.use(
