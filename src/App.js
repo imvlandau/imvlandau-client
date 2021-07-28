@@ -5,7 +5,7 @@ import {
 } from "@material-ui/core/styles";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import grey from "@material-ui/core/colors/grey";
-import Participants from './pages/Participants';
+import Participant from './pages/Participant';
 
 const theme = responsiveFontSizes(
   createTheme({
@@ -51,7 +51,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Participants />
+      <Participant />
     </ThemeProvider>
   );
 }
