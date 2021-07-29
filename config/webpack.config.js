@@ -26,6 +26,7 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -737,6 +738,18 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
+        isEnvProduction &&
+          new CopyPlugin({
+            patterns: [
+              {
+                from: paths.appSrc + '/locales',
+                to: paths.appPublic + '/locales',
+                transform: function (content, path) {
+                  return JSON.stringify(JSON.parse(content));
+                }
+              },
+            ]
+          }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell webpack to provide empty mocks for them so importing them works.
