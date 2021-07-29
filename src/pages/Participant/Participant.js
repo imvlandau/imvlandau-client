@@ -202,6 +202,7 @@ function Participant({ history, notifications, activeStep: activeStepProp = 0, q
                 <Typography
                   variant="h6"
                   className={classes.headingParticipantSettings}
+                   sx={{mt: 1}}
                 >
                   {t("attendees.companions.section.title")}
                 </Typography>
