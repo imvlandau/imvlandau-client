@@ -94,11 +94,11 @@ function Participant({ history, notifications, activeStep: activeStepProp = 0, q
             type: "success"
           });
       } else {
-        props.createParticipantFailure({
+        props.createParticipantFailure([{
           key: "attendees.form.incomplete",
           message: t("notification.form.incomplete"),
           type: "error"
-        });
+        }]);
       }
     }
   };
