@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import Button from "@material-ui/core/Button";
-import EventListener from "react-event-listener";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useEventListener from "../../services/useEventListener";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,16 +45,18 @@ function Notifications({ options, notifications, ...props }) {
   const classes = useStyles();
   const didMountRef = React.useRef(false);
 
-  const handleCloseAll = () => {
-    toast.dismiss();
-  };
-
-  const handleKeyDown = event => {
-    // on pressing the escape key
-    if (event.which === 27 || event.keyCode === 27) {
-      handleCloseAll();
-    }
-  };
+  // Event handler utilizing useCallback ...
+  // ... so that reference never changes.
+  const handleKeyDown = useCallback(
+    ({ which, keyCode }) => {
+      // on pressing the escape key
+      if (which === 27 || keyCode === 27) {
+        toast.dismiss();
+      }
+    },
+    []
+  );
+  useEventListener("keydown", handleKeyDown);
 
   React.useEffect(() => {
     if (!didMountRef.current) {
@@ -81,7 +83,6 @@ function Notifications({ options, notifications, ...props }) {
 
   return (
     <React.Fragment>
-      <EventListener onKeyDown={handleKeyDown} target="window" />
       <ToastContainer
         {...options}
         className={classes.root}
