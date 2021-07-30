@@ -16,8 +16,8 @@
   "caption.comming.soon": "Demnächst verfügbar",
   "notification.form.incomplete": "Sie müssen alle Pflichtfelder* ausfüllen.",
   "label.token": "Kennung",
-  "label.pre.and.last.name": "Vor- und Nachname",
+  "label.pre.and.last.name": "Name",
   "label.email": "E-Mail",
-  "label.mobile": "Whatsapp-Nummer",
-  "label.actions": "Aktionen"
+  "label.mobile": "Whatsapp-Nr.",
+  "label.actions": "Löschen"
 }

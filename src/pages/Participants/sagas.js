@@ -1,19 +1,23 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import { fetchParticipantsSuccess, fetchParticipantsFailure } from "./actions";
-import { FETCH_PARTICIPANTS_REQUEST } from "./constants";
+import { FETCH_PARTICIPANTS_REQUEST, FETCH_PARTICIPANTS_FAILURE } from "./constants";
 import ParticipantsService from "./service";
-import { addNotification } from "../../containers/Notifications";
+import { addNotifications } from "../../containers/Notifications";
 
-function* onLoadParticipants() {
+function* onFetchParticipants() {
   try {
-    const response = yield call(ParticipantsService.getParticipants);
+    const response = yield call(ParticipantsService.fetchParticipants);
     yield put(fetchParticipantsSuccess(response));
-  } catch (error) {
-    yield put(fetchParticipantsFailure(error));
-    yield put(addNotification(error));
+  } catch (errors) {
+    yield put(fetchParticipantsFailure(errors));
   }
 }
 
+function* onFetchParticipantsFailure(action) {
+    yield put(addNotifications(action.errors));
+}
+
 export default function* watchActions() {
-  yield takeLatest(FETCH_PARTICIPANTS_REQUEST, onLoadParticipants);
+  yield takeLatest(FETCH_PARTICIPANTS_REQUEST, onFetchParticipants);
+  yield takeLatest(FETCH_PARTICIPANTS_FAILURE, onFetchParticipantsFailure);
 }

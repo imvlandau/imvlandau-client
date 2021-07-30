@@ -15,7 +15,7 @@
   "attendees.confirmation.section.name": "Confirmation",
   "attendees.confirmation.section.subtitle.beginning": "We've sent this QR-Code to the E-Mail ",
   "attendees.confirmation.section.subtitle.end": " Please be ready to show it at the entrance of this Event.",
-  "attendees.has.been.scanned": "Has been scanned",
+  "attendees.has.been.scanned": "Scanned",
   "attendees.no.attendees.registered.yet": "No attendees registered yet",
   "attendees.delete.tooltip": "Delete attendees",
   "attendees.delete.dialog.message": "Do you really want to exclude the following participant from this list: "
