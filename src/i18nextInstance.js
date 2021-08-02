@@ -1,20 +1,38 @@
 import i18next from "i18next";
-import XHR from "i18next-xhr-backend"; // have a own xhr fallback
-import Backend from "i18next-multiload-backend-adapter";
+import ChainedBackend from "i18next-chained-backend";
+import LocalStorageBackend from "i18next-localstorage-backend";
+import HttpBackend from "i18next-xhr-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
+import resourcesToBackend  from "i18next-resources-to-backend";
 import { initReactI18next } from "react-i18next";
 import http from "./services/http";
+import common from "./locales/de-DE/common.json";
+import home from "./locales/de-DE/home.json";
+import participant from "./locales/de-DE/participant.json";
 
 const i18nextInstance = i18next.createInstance();
 
+const bundledResources = {
+  "de-DE": {
+    common,
+    home,
+    participant
+  }
+};
+
 i18nextInstance
-  .use(Backend)
+  .use(ChainedBackend)
   .use(LanguageDetector)
   .use(initReactI18next) // passes i18n down to react-i18next
   .init(
     {
-      fallbackLng: "de-DE",
+      lng: "de-DE",
+      fallbackLng: "en-US",
+      // fallbackLng: false,
       load: "currentOnly",
+      initImmediate: false, // https://www.i18next.com/overview/configuration-options#languages-namespaces-resources
+      // partialBundledLanguages: true,
+      // preload: ["de-DE"],
       order: [
         "querystring",
         "cookie",
@@ -26,10 +44,20 @@ i18nextInstance
       ],
       debug: false,
       backend: {
-        backend: XHR,
-        backendOption: {
-          loadPath: "/locales/{{lng}}/{{ns}}.json"
-        }
+        backends: [
+          resourcesToBackend(bundledResources),
+          LocalStorageBackend,
+          HttpBackend
+        ],
+        backendOptions: [{
+            // options below
+          },
+          {
+            prefix: "imv_resource_", // prefix for stored languages
+            expirationTime: 4 * 24 * 60 * 60 * 1000, // 4 days
+            loadPath: "/locales/{{lng}}/{{ns}}.json"
+          }
+        ],
       },
       react: {
         useSuspense: false

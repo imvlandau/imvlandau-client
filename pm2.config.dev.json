@@ -4,7 +4,11 @@
       "name": "pmb.dev.server",
       "script": "scripts/start.js",
       "interpreter": "node",
-      "watch": ["scripts/start.js"],
+      "watch": [
+        "scripts/start.js",
+        "config/imv-i18next-resource-bundler.js",
+        "src/setupProxy.js"
+      ],
       "watch_options": {
         "usePolling": true,
          "followSymlinks": false

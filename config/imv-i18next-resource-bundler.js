@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs-extra");
 
 module.exports = function(basePath, languages, namespaces) {
-  const data = {};
+  let data = {};
   const targetLanguages = languages.split("+");
   const targetNamespaces = namespaces.split("+");
   const findNamespacesByLanguage = languagePath =>
@@ -23,19 +23,18 @@ module.exports = function(basePath, languages, namespaces) {
         ns => targetNamespaces.indexOf(ns) > -1
       );
 
-      availableNamespaces.forEach(ns => {
+      availableNamespaces.some(ns => {
         var filepath = path.join(languagePath, `${ns}.json`);
         if (fs.pathExistsSync(filepath)) {
-          var content = fs.readJsonSync(filepath, { throws: false });
-          if (content) data[language][ns] = content;
+          data = fs.readJsonSync(filepath, { throws: false });
+          return data;
         }
       });
     } else {
       targetNamespaces.forEach(ns => {
-        data[language][ns] = {};
+        data = {};
       });
     }
   });
-
   return data;
 };

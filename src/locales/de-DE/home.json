@@ -1,0 +1,14 @@
+{
+  "title": "Erstellen Sie schnell und einfach webbasierte Anwendungen",
+  "subtitle": "Konfigurieren Sie Ihre Infrastruktur mit Hilfe eines Online-Terminals",
+  "button.get.started": "Projekt erstellen",
+  "button.coming.soon": "(in Kürze wieder verfügbar)",
+  "heading.what.is.playmobox": "Was ist Playmobox?",
+  "heading.provision.server": "Wie startet man einen Server?",
+  "caption.tools.and.components": "Nutzen Sie etablierte Web-Tools auf schlüpfrige Weise. Zum Beispiel durch Ziehen und Ablegen gebrauchsfertiger Komponenten in Ihr Projekt.",
+  "caption.access.your.filesystem": "Greifen Sie auf das Dateisystem Ihres Projekts zu und verwalten Sie es. Erstellen, aktualisieren oder löschen Sie einfach Dateien und Ordner, wie Sie es früher in Ihrer Desktop-Umgebung getan haben.",
+  "caption.execute.shell.commands": "Führen Sie beliebige Shell-Befehle über ein Web-Terminal aus. Führen Sie beispielsweise einen Modulbündler wie Webpack aus oder richten Sie einfach einen zusätzlichen Server für Ihre API-Aufrufe ein.",
+  "caption.connect.with.github": "Importieren und exportieren Sie Ihre Anwendung von und nach Github. Führen Sie beliebige Git-Operationen im Web-Terminal aus, z. B. Pull, Commit und Push.",
+  "caption.use.hot.module.reloading": "Kommen Sie in den Genuss der Vorzüge von \"Hot Module Reloading\", was bei speichern Ihrer Änderungen diese in das Endresultat integriert und in Echtzeit anzeigt ohne den Browser manuell neu laden zu müssen.",
+  "caption.collaborate.by.using.diff.tools": "Arbeiten Sie in Echtzeit mit anderen zusammen. Vergleichen und verbinden Sie alle Änderungen mit Hilfe eines Side-to-Side-Diff-Editors. Sie müssen lediglich den Link Ihres Projekts freigeben."
+}
