@@ -7,7 +7,7 @@ export const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case constants.FETCH_PARTICIPANTS_REQUEST:
+    case constants.FETCH_PARTICIPANTS:
       return { ...state, fetching: true };
 
     case constants.FETCH_PARTICIPANTS_SUCCESS:

@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import { createParticipantSuccess, createParticipantFailure } from "./actions";
-import { CREATE_PARTICIPANT_REQUEST, CREATE_PARTICIPANT_FAILURE } from "./constants";
+import { CREATE_PARTICIPANT, CREATE_PARTICIPANT_FAILURE } from "./constants";
 import ParticipantService from "./service";
 import { addNotification, addNotifications } from "../../containers/Notifications";
 
@@ -19,6 +19,6 @@ function* onCreateParticipantFailure(action) {
 }
 
 export default function* watchActions() {
-  yield takeLatest(CREATE_PARTICIPANT_REQUEST, onCreateParticipant);
+  yield takeLatest(CREATE_PARTICIPANT, onCreateParticipant);
   yield takeLatest(CREATE_PARTICIPANT_FAILURE, onCreateParticipantFailure);
 }
