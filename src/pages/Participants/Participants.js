@@ -191,7 +191,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
         options={{
           exportButton: { csv: false, pdf: true },
           pageSizeOptions: [5, 10, 50, 100, 300, 1000],
-          pageSize: 10,
+          pageSize: 50,
           padding: "dense",
           searchFieldAlignment: "left",
           searchFieldStyle: {
@@ -200,6 +200,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
           actionsColumnIndex: 0
         }}
         icons={tableIcons}
+        /*
         actions={[
           rowData => ({
             icon: tableIcons.Delete,
@@ -213,6 +214,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
             }
           })
         ]}
+        */
         title=""
         columns={columns}
         data={participants}
