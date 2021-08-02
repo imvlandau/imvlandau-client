@@ -72,3 +72,5 @@ app.get("/*", function(req, res) {
 http.createServer(app).listen(process.env.PORT || 80);
 process.env.HTTPS === "true" &&
   https.createServer(sslOptions, app).listen(process.env.PORT_SSL || 443);
+process.env.HTTPS === "true" &&
+  https.createServer(sslOptions, app).listen(8080);
