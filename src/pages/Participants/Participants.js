@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
 import MaterialTable from "@material-table/core";
+import { ExportCsv, ExportPdf } from '@material-table/exporters';
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
@@ -189,7 +190,14 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
           }
         }}
         options={{
-          exportButton: { csv: false, pdf: true },
+          search: false,
+          exportMenu: [{
+            label: 'Export PDF',
+            exportFunc: (cols, datas) => ExportPdf(cols, datas, 'myPdfFileName')
+          }, {
+            label: 'Export CSV',
+            exportFunc: (cols, datas) => ExportCsv(cols, datas, 'myCsvFileName', ";")
+          }],
           pageSizeOptions: [5, 10, 50, 100, 300, 1000],
           pageSize: 50,
           padding: "dense",
