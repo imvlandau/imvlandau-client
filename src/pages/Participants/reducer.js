@@ -7,6 +7,26 @@ export const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case constants.SET_HAS_BEEN_SCANNED:
+      return { ...state, fetching: true };
+
+    case constants.SET_HAS_BEEN_SCANNED_SUCCESS: {
+      let data = state.data.map(participant => {
+        return participant.id !== action.data.id ? participant : action.data;
+      });
+      return {
+        ...state,
+        fetching: false,
+        data
+      };
+    }
+
+    case constants.SET_HAS_BEEN_SCANNED_FAILURE:
+      return {
+        ...state,
+        fetching: false
+      };
+
     case constants.FETCH_PARTICIPANTS:
       return { ...state, fetching: true };
 
