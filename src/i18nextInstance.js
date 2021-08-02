@@ -50,11 +50,15 @@ i18nextInstance
           HttpBackend
         ],
         backendOptions: [{
-            // options below
+            // options for resourcesToBackend
           },
           {
+            // options for LocalStorageBackend
             prefix: "imv_resource_", // prefix for stored languages
-            expirationTime: 4 * 24 * 60 * 60 * 1000, // 4 days
+            expirationTime: 4 * 24 * 60 * 60 * 1000 // 4 days
+          },
+          {
+            // options for HttpBackend
             loadPath: "/locales/{{lng}}/{{ns}}.json"
           }
         ],
