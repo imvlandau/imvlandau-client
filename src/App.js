@@ -3,6 +3,7 @@ import {
   createTheme,
   responsiveFontSizes
 } from "@material-ui/core/styles";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import grey from "@material-ui/core/colors/grey";
 import Participant from './pages/Participant';
@@ -46,13 +47,28 @@ const theme = responsiveFontSizes(
   })
 );
 
+const titleTemplate = window.location.hostname.indexOf('playmobox') !== -1 ? "Playmobox" : "Imv-landau";
+const defaultTitle = window.location.hostname.indexOf('playmobox') !== -1 ? "Playmobox - web application editor" : "Imv-landau - Islamischer multikultureller Verein in Landau";
+const content = window.location.hostname.indexOf('playmobox') !== -1 ? "Playmobox is a high-end web application editor" : "Imv-landau - Islamischer multikultureller Verein in Landau";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Participant />
-    </ThemeProvider>
+    <HelmetProvider>
+      <Helmet
+        titleTemplate={"%s | " + titleTemplate}
+        defaultTitle={"%s | " + defaultTitle}
+        meta={[
+          {
+            name: "description",
+            content: "%s | " + content
+          }
+        ]}
+      />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Participant />
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { forwardRef, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
 import MaterialTable from "@material-table/core";
@@ -164,6 +165,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
 
   return (
     <React.Fragment>
+      <Helmet title={t("attendees.registration.section.name")} />
       <Notifications />
       <ImvAppBar />
       <Container maxWidth="lg">

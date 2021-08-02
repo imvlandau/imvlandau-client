@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
 import { useTranslation } from "react-i18next";
@@ -128,6 +129,7 @@ function Participant({ history, notifications, activeStep: activeStepProp = 0, q
 
   return (
     <React.Fragment>
+      <Helmet title={t("attendees.registration.section.name")} />
       <Notifications />
       <ImvAppBar />
       <Container maxWidth="lg">
