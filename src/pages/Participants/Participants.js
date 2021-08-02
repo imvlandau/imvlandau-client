@@ -173,77 +173,77 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
         <Typography component="h1" variant="h5" sx={{mt: 1, mb:1}}>
           {t("attendees.registration.title")}
         </Typography>
-      <MaterialTable
-        isLoading={fetching}
-        localization={{
-          body: {
-            emptyDataSourceMessage: (
-              <React.Fragment>
-                <Typography variant="h4" color="primary" gutterBottom>
-                  {t("attendees.no.attendees.registered.yet")}
-                </Typography>
-              </React.Fragment>
-            )
-          },
-          header: {
-            actions: t("label.actions")
-          }
-        }}
-        options={{
-          search: false,
-          exportMenu: [{
-            label: 'Export PDF',
-            exportFunc: (cols, datas) => ExportPdf(cols, datas, 'myPdfFileName')
-          }, {
-            label: 'Export CSV',
-            exportFunc: (cols, datas) => ExportCsv(cols, datas, 'myCsvFileName', ";")
-          }],
-          pageSizeOptions: [5, 10, 50, 100, 300, 1000],
-          pageSize: 50,
-          padding: "dense",
-          searchFieldAlignment: "left",
-          searchFieldStyle: {
-            marginLeft: theme.spacing(-3)
-          },
-          actionsColumnIndex: 0
-        }}
-        icons={tableIcons}
-        /*
-        actions={[
-          rowData => ({
-            icon: tableIcons.Delete,
-            tooltip: t("attendees.delete.tooltip"),
-            onClick: (event, rowData) => {
-              if (
-                window.confirm(t("attendees.delete.dialog.message") + rowData.name)
-              ) {
-                props.deleteAttendee(rowData.id);
-              }
+        <MaterialTable
+          isLoading={fetching}
+          localization={{
+            body: {
+              emptyDataSourceMessage: (
+                <React.Fragment>
+                  <Typography variant="h4" color="primary" gutterBottom>
+                    {t("attendees.no.attendees.registered.yet")}
+                  </Typography>
+                </React.Fragment>
+              )
+            },
+            header: {
+              actions: t("label.actions")
             }
-          })
-        ]}
-        */
-        title=""
-        columns={columns}
-        data={participants}
-        cellEditable={{
-          onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
-            return new Promise((resolve, reject) => {
-              if (
-                columnDef.field === "hasBeenScanned" &&
-                oldValue !== newValue
-              ) {
-                props.setHasBeenScanned(rowData.id, newValue);
-                resolve();
-              } else {
-                resolve();
+          }}
+          options={{
+            search: false,
+            exportMenu: [{
+              label: 'Export PDF',
+              exportFunc: (cols, datas) => ExportPdf(cols, datas, 'myPdfFileName')
+            }, {
+              label: 'Export CSV',
+              exportFunc: (cols, datas) => ExportCsv(cols, datas, 'myCsvFileName', ";")
+            }],
+            pageSizeOptions: [5, 10, 50, 100, 300, 1000],
+            pageSize: 50,
+            padding: "dense",
+            searchFieldAlignment: "left",
+            searchFieldStyle: {
+              marginLeft: theme.spacing(-3)
+            },
+            actionsColumnIndex: 0
+          }}
+          icons={tableIcons}
+          /*
+          actions={[
+            rowData => ({
+              icon: tableIcons.Delete,
+              tooltip: t("attendees.delete.tooltip"),
+              onClick: (event, rowData) => {
+                if (
+                  window.confirm(t("attendees.delete.dialog.message") + rowData.name)
+                ) {
+                  props.deleteAttendee(rowData.id);
+                }
               }
-            });
-          }
-        }}
-      />
+            })
+          ]}
+          */
+          title=""
+          columns={columns}
+          data={participants}
+          cellEditable={{
+            onCellEditApproved: (newValue, oldValue, rowData, columnDef) => {
+              return new Promise((resolve, reject) => {
+                if (
+                  columnDef.field === "hasBeenScanned" &&
+                  oldValue !== newValue
+                ) {
+                  props.setHasBeenScanned(rowData.id, newValue);
+                  resolve();
+                } else {
+                  resolve();
+                }
+              });
+            }
+          }}
+        />
+      </Container>
       <ImvFooter showDivider />
-    </Container>
     </React.Fragment>
   );
 }
