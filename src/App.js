@@ -7,7 +7,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import grey from "@material-ui/core/colors/grey";
-import { Home } from "./pages/Home";
+import Home from "./pages/Home";
 import Participant from './pages/Participant';
 import Participants from './pages/Participants';
 
