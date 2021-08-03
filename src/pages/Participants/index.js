@@ -1,5 +1,3 @@
-import Participants from "./Participants";
-import reducer, { initialState } from "./reducer";
-
 export * from "./actions";
-export { Participants as default, reducer, initialState };
+export { default as reducer, initialState } from "./reducer";
+export { default } from "./Participants";
