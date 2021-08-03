@@ -1,11 +1,6 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import * as actions from "./actions";
-import {
-  SET_HAS_BEEN_SCANNED,
-  SET_HAS_BEEN_SCANNED_FAILURE,
-  FETCH_PARTICIPANTS,
-  FETCH_PARTICIPANTS_FAILURE
-} from "./constants";
+import * as constants from "./constants";
 import ParticipantsService from "./service";
 import { addNotifications } from "../../containers/Notifications";
 
@@ -36,8 +31,8 @@ function* onFetchParticipantsFailure(action) {
 }
 
 export default function* watchActions() {
-  yield takeLatest(SET_HAS_BEEN_SCANNED, onSetHasBeenScanned);
-  yield takeLatest(SET_HAS_BEEN_SCANNED_FAILURE, onSetHasBeenScannedFailure);
-  yield takeLatest(FETCH_PARTICIPANTS, onFetchParticipants);
-  yield takeLatest(FETCH_PARTICIPANTS_FAILURE, onFetchParticipantsFailure);
+  yield takeLatest(constants.SET_HAS_BEEN_SCANNED, onSetHasBeenScanned);
+  yield takeLatest(constants.SET_HAS_BEEN_SCANNED_FAILURE, onSetHasBeenScannedFailure);
+  yield takeLatest(constants.FETCH_PARTICIPANTS, onFetchParticipants);
+  yield takeLatest(constants.FETCH_PARTICIPANTS_FAILURE, onFetchParticipantsFailure);
 }
