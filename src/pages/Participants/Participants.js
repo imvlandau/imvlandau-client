@@ -62,13 +62,6 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
 
   const columns = [
     {
-      readonly: false,
-      export: true,
-      field: "hasBeenScanned",
-      title: t("attendees.has.been.scanned"),
-      lookup: { false: "no", true: "yes" }
-    },
-    {
       readonly: true,
       export: true,
       field: "token",
@@ -150,6 +143,13 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
       export: true,
       field: "companion4",
       width: 50
+    },
+    {
+      readonly: false,
+      export: true,
+      field: "hasBeenScanned",
+      title: t("attendees.has.been.scanned"),
+      lookup: { false: t("label.no"), true: t("label.yes") }
     }
   ];
 

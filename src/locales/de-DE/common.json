@@ -19,5 +19,7 @@
   "label.pre.and.last.name": "Name",
   "label.email": "E-Mail",
   "label.mobile": "Whatsapp-Nr.",
-  "label.actions": "Löschen"
+  "label.actions": "Löschen",
+  "label.yes": "ja",
+  "label.no": "nein"
 }
