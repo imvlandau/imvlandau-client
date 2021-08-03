@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Participant({ history, notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, createParticipant, createParticipantFailure, ...props }) {
+function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, createParticipant, createParticipantFailure, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation(["participant"]);
   const didMountRef = React.useRef(false);
