@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import "./PmbLogo.scss";
+import "./pmbLogo.scss";
 
 function PmbLogo({ rotating, inverted, hidden, className, size }) {
   return (
