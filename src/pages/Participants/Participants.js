@@ -214,7 +214,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
                   }
                   finalData = finalData.map(row => {
                     return row.map(col => {
-                      return col[0] == '+' ? col.replace(/^\+49/, "+49 (0) ") : col;
+                      return col[0] === '+' ? col.replace(/^\+49/, "+49 (0) ") : col;
                     });
                   });
                   const builder = new CsvBuilder(filename + '.csv');
