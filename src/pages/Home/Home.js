@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Home() {
+export default function Home() {
   const classes = useStyles();
   const { t } = useTranslation(["home"]);
 
@@ -280,5 +280,3 @@ function Home() {
     </React.Fragment>
   );
 }
-
-export default Home;
