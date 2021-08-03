@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Participant({ history, notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, ...props }) {
+function Participant({ history, notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, createParticipant, createParticipantFailure, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation(["participant"]);
   const didMountRef = React.useRef(false);
@@ -79,7 +79,7 @@ function Participant({ history, notifications, activeStep: activeStepProp = 0, q
         participant.email &&
         participant.mobile
       ) {
-        props.createParticipant({
+        createParticipant({
             name: participant.name,
             email: participant.email,
             mobile: participant.mobile,
@@ -95,7 +95,7 @@ function Participant({ history, notifications, activeStep: activeStepProp = 0, q
             type: "success"
           });
       } else {
-        props.createParticipantFailure([{
+        createParticipantFailure([{
           key: "attendees.form.incomplete",
           message: t("notification.form.incomplete"),
           type: "error"
