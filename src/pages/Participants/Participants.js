@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
 import MaterialTable from "@material-table/core";
-import { ExportCsv, ExportPdf } from '@material-table/exporters';
+import { ExportPdf } from '@material-table/exporters';
+import { CsvBuilder } from 'filefy';
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +13,7 @@ import Box from "@material-ui/core/Box";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
 import ImvFooter from "../../components/ImvFooter";
+import { getCurrentCalendarWeek } from "../../services/helpers";
 import "./participants.scss";
 
 import AddBox from "@material-ui/icons/AddBox";
@@ -194,10 +196,37 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
             search: false,
             exportMenu: [{
               label: 'Export PDF',
-              exportFunc: (cols, datas) => ExportPdf(cols, datas, 'myPdfFileName')
+              exportFunc: (cols, datas) => ExportPdf(cols, datas, 'IMV-Landau-Gästeliste-Woche-' + getCurrentCalendarWeek())
             }, {
               label: 'Export CSV',
-              exportFunc: (cols, datas) => ExportCsv(cols, datas, 'myCsvFileName', ";")
+              exportFunc: (cols, datas) => {
+                let filename = 'IMV-Landau-Gästeliste-Woche-' + getCurrentCalendarWeek();
+                let delimiter = ";";
+                try {
+                  let finalData = datas;
+                  // Grab first item for datas array, make sure it is also an array.
+                  // If it is an object, 'flatten' it into an array of strings.
+                  if (datas.length && !Array.isArray(datas[0])) {
+                    if (typeof datas[0] === 'object') {
+                    // Turn datas into an array of string arrays, without the `tableData` prop
+                    finalData = datas.map(({ tableData, ...row }) => Object.values(row));
+                    }
+                  }
+                  finalData = finalData.map(row => {
+                    return row.map(col => {
+                      return col[0] == '+' ? col.replace(/^\+49/, "+49 (0) ") : col;
+                    });
+                  });
+                  const builder = new CsvBuilder(filename + '.csv');
+                  builder
+                    .setDelimeter(delimiter)
+                    .setColumns(cols.map((col) => col.title))
+                    .addRows(Array.from(finalData))
+                    .exportFile();
+                } catch (err) {
+                  console.error(`error in ExportCsv : ${err}`);
+                }
+              }
             }],
             pageSizeOptions: [5, 10, 50, 100, 300, 1000],
             pageSize: 50,
@@ -206,10 +235,9 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
             searchFieldStyle: {
               marginLeft: theme.spacing(-3)
             },
-            actionsColumnIndex: 0
+            actionsColumnIndex: -1
           }}
           icons={tableIcons}
-          /*
           actions={[
             rowData => ({
               icon: tableIcons.Delete,
@@ -223,7 +251,6 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
               }
             })
           ]}
-          */
           title=""
           columns={columns}
           data={participants}
