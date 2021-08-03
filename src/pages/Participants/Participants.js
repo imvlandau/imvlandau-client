@@ -12,6 +12,7 @@ import Box from "@material-ui/core/Box";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
 import ImvFooter from "../../components/ImvFooter";
+import "./participants.scss";
 
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
