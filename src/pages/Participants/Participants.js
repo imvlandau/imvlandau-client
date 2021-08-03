@@ -246,7 +246,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
                 if (
                   window.confirm(t("attendees.delete.dialog.message") + rowData.name)
                 ) {
-                  props.deleteAttendee(rowData.id);
+                  props.deleteParticipant(rowData.id);
                 }
               }
             })

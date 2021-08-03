@@ -7,6 +7,26 @@ export const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case constants.DELETE_PARTICIPANT:
+      return { ...state, fetching: true };
+
+    case constants.DELETE_PARTICIPANT_SUCCESS: {
+      let data = state.data.filter(participant => {
+        return participant.id !== action.id;
+      });
+      return {
+        ...state,
+        fetching: false,
+        data
+      };
+    }
+
+    case constants.DELETE_PARTICIPANT_FAILURE:
+      return {
+        ...state,
+        fetching: false
+      };
+
     case constants.SET_HAS_BEEN_SCANNED:
       return { ...state, fetching: true };
 
