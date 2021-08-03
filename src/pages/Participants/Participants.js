@@ -159,8 +159,8 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
   React.useEffect(() => {
     if (!didMountRef.current) {
       // mounted
-      fetchParticipants();
       didMountRef.current = true;
+      fetchParticipants();
     } else {
       // updated
       setParticipants(participantsProp);
