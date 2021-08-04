@@ -55,7 +55,7 @@ i18nextInstance
           {
             // options for LocalStorageBackend
             prefix: "imv_resource_", // prefix for stored languages
-            expirationTime: 4 * 24 * 60 * 60 * 1000 // 4 days
+            expirationTime: process.env.NODE_ENV === "production" ? 4 * 24 * 60 * 60 * 1000 : 0 // 4 days
           },
           {
             // options for HttpBackend
