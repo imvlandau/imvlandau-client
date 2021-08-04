@@ -106,21 +106,21 @@ function Settings({
   };
   const handleChangeEventDate = newValue => {
     settings.eventDate = newValue;
-    setSettings({...settings});
+    setSettings({ ...settings });
   };
   const handleChangeEventTime1 = newValue => {
     settings.eventTime1 = newValue;
-    setSettings({...settings});
+    setSettings({ ...settings });
   };
   const handleChangeEventTime2 = newValue => {
     settings.eventTime2 = newValue;
-    setSettings({...settings});
+    setSettings({ ...settings });
   };
 
   const handleChangeEmailTemplate = () => {
     if (editorRef.current) {
       settings.eventEmailTemplate = editorRef.current.getContent();
-      setSettings({...settings});
+      setSettings({ ...settings });
     }
   };
 
