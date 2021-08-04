@@ -1,0 +1,12 @@
+{
+  "settings.title": "Event settings",
+  "settings.saved": "Settings saved successfully",
+  "settings.label.eventEmailTemplate": "E-Mail-text",
+  "settings.label.eventEmailSubject": "E-Mail-subject",
+  "settings.label.eventLocation": "Event location",
+  "settings.label.eventTopic": "Event topic",
+  "settings.label.eventDate": "Event date",
+  "settings.label.eventTime2": "Time for second appointment",
+  "settings.label.eventTime1": "Time for first appointment",
+  "settings.label.eventMaximumAmount": "Maximum amount of participants"
+}

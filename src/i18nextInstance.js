@@ -9,11 +9,13 @@ import http from "./services/http";
 import common from "./locales/de-DE/common.json";
 import home from "./locales/de-DE/home.json";
 import participant from "./locales/de-DE/participant.json";
+import settings from "./locales/de-DE/settings.json";
 
 const i18nextInstance = i18next.createInstance();
 
 const bundledResources = {
   "de-DE": {
+    settings,
     common,
     home,
     participant

@@ -1,0 +1,12 @@
+{
+  "settings.title": "Veranstaltungseinstellungen",
+  "settings.saved": "Einstellungen erfolgreich gespeichert",
+  "settings.label.eventEmailTemplate": "E-Mail-Text",
+  "settings.label.eventEmailSubject": "E-Mail-Betreff",
+  "settings.label.eventLocation": "Veranstaltungsort",
+  "settings.label.eventTopic": "Veranstaltungsthema",
+  "settings.label.eventDate": "Veranstaltungsdatum",
+  "settings.label.eventTime2": "Uhrzeit für zweiten Termin",
+  "settings.label.eventTime1": "Uhrzeit für ersten Termin",
+  "settings.label.eventMaximumAmount": "Maximale Teilnehmerzahl"
+}

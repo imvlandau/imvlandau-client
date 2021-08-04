@@ -10,6 +10,7 @@ import grey from "@material-ui/core/colors/grey";
 import Home from "./pages/Home";
 import Participant from './pages/Participant';
 import Participants from './pages/Participants';
+import Settings from './pages/Settings';
 
 const theme = responsiveFontSizes(
   createTheme({
@@ -73,6 +74,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={window.location.hostname.indexOf('playmobox') !== -1 ? Home : Participant} />
             <Route exact path="/participants" component={Participants} />
+            <Route exact path="/settings" component={Settings} />
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
