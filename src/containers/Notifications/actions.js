@@ -30,13 +30,35 @@ export const addNotification = payload => {
 
 export const addNotifications = payload => {
   let notifications = [];
-  for (var key in payload) {
+  if (
+    !Array.isArray(payload) &&
+    payload &&
+    payload.response &&
+    !Array.isArray(payload.response.data)
+  ) {
     notifications.push({
-      key: payload[key]["key"],
-      message: payload[key]["message"],
-      type: payload[key]["type"] || "error",
+      key: payload.key || payload.message,
+      message:
+        (payload.response &&
+          payload.response.data &&
+          payload.response.data.message) ||
+        payload.message,
+      type: payload.type || "error",
       toastId: new Date().getTime() + Math.random()
     });
+  } else {
+    let notificationsTmp =
+      payload && payload.response && Array.isArray(payload.response.data)
+        ? payload.response.data
+        : payload;
+    for (var key in notificationsTmp) {
+      notifications.push({
+        key: notificationsTmp[key]["key"],
+        message: notificationsTmp[key]["message"],
+        type: notificationsTmp[key]["type"] || "error",
+        toastId: new Date().getTime() + Math.random()
+      });
+    }
   }
   return {
     type: constants.ADD_NOTIFICATIONS,
