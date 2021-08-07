@@ -13,6 +13,7 @@ import Box from "@material-ui/core/Box";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
 import ImvFooter from "../../components/ImvFooter";
+import i18nextInstance from "../../i18nextInstance";
 import { getCurrentCalendarWeek } from "../../services/helpers";
 import "./participants.scss";
 
@@ -56,7 +57,7 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-function Participants({ participants: participantsProp, fetchParticipants, fetching, ...props }) {
+function Participants({ participants: participantsProp, fetchParticipants, fetching, fetchSettings, settings, ...props }) {
   const didMountRef = useRef(false);
   const theme = useTheme();
   const { t } = useTranslation(["participant"]);
@@ -161,6 +162,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
       // mounted
       didMountRef.current = true;
       fetchParticipants();
+      fetchSettings();
     } else {
       // updated
       setParticipants(participantsProp);
@@ -174,7 +176,14 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
       <ImvAppBar />
       <Container maxWidth="lg">
         <Typography component="h1" variant="h5" sx={{mt: 1, mb:1}}>
-          {t("attendees.registration.title")}
+        {
+          t("attendees.event.subject", {
+            eventTopic: settings.eventTopic,
+            eventTime: new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : ""),
+            eventDate: new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' }),
+            eventLocation: settings.eventLocation
+          })
+        }
         </Typography>
         <MaterialTable
           isLoading={fetching}
@@ -278,7 +287,8 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
 
 const mapStateToProps = (state, ownProps) => ({
   participants: state.participants.data,
-  fetching: state.participants.fetching
+  fetching: state.participants.fetching,
+  settings: state.settings.data
 });
 
 export default connect(

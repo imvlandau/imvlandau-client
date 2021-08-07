@@ -1,10 +1,9 @@
 {
   "attendees.browser.title": "Event",
-  "attendees.event.title": "Freitagsgebet - 30.07.2021 um 13:45 Uhr - Abu Bakr Moschee - Danziger Platz 14 - Landau",
-  "attendees.registration.title":"Registrierungen - Freitagsgebet - 30.07.2021 um 13:45 Uhr",
+  "attendees.event.subject": "Registrierung für {{ eventTopic }} um {{ eventTime }} Uhr am {{ eventDate }} in der {{ eventLocation }}",
   "attendees.registration.section.name": "Anmeldung",
-  "attendees.registration.section.title": "Hier können Sie sich und Ihre Angehörige für das Freitagsgebet registrieren.",
-  "attendees.registration.section.subtitle": "Bitte füllen Sie das folgende Formular aus. Im Anschluss senden wir Ihnen an die hier eingegebene E-Mail-Adresse einen QR-Code zu. Bitte bewahren Sie diesen gut auf und zeigen Sie diesen an der Anmdelung im Eingangsbereich um einen reibungslosen und schnellen Anmeldungsprozess zu ermöglichen.",
+  "attendees.registration.section.title": "Hier können Sie sich und Ihre Angehörige registrieren.",
+  "attendees.registration.section.subtitle": "Durch ausfüllen des Formulars bekommen Sie an die hier eingegebene E-Mail-Adresse einen QR-Code zugesendet, um im Eingangsbereich um einen reibungslosen und schnellen Anmeldungsprozess zu ermöglichen.",
   "attendees.registration.complete": "Ihre Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach.",
   "attendees.companions.section.title": "In Begleitung von...",
   "attendees.companions.section.title.abbr": "Begl.",

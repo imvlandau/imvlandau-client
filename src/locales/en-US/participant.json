@@ -1,10 +1,9 @@
 {
   "attendees.browser.title": "Event",
-  "attendees.event.title": "Fridays prayer - 2021-07-30 at 13:45 o'clock - Abu Bakr Moschee - Danziger Platz 14 - Landau",
-  "attendees.registration.title":"Registration - Fridays prayer - 2021-07-30 at 13:45 o'clock",
+  "attendees.event.subject": "Registration for {{ eventTopic }} at {{ eventTime }} o'clock on {{ eventDate }} at {{ eventLocation }}",
   "attendees.registration.section.name": "Registration",
-  "attendees.registration.section.title": "Here you can register yourself and your companions for Fridays prayer.",
-  "attendees.registration.section.subtitle": "Just fill out this formular. Afterwards we will send a QR-Code to your E-Mail. Please keep this QR-Code ready and be prepared to show it at the entrance in order to speed up the registration process.",
+  "attendees.registration.section.title": "Here you can register yourself and your companions.",
+  "attendees.registration.section.subtitle": "By filling in this formular you will get a QR-Code to your E-Mail, which is necessary for entering this event.",
   "attendees.registration.complete": "Registration complete. You should soon receive an E-Mail from us.",
   "attendees.companions.section.title": "Accompanied by...",
   "attendees.companions.section.title.abbr": "Acc.",

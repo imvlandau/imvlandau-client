@@ -1,5 +1,7 @@
 import * as constants from "./constants";
 
+export { fetchSettings } from "../Settings/actions";
+
 export const deleteParticipant = (id, hasBeenScanned) => ({ type: constants.DELETE_PARTICIPANT, id });
 export const deleteParticipantSuccess = ({id}) => ({ type: constants.DELETE_PARTICIPANT_SUCCESS, id });
 export const deleteParticipantFailure = errors => ({ type: constants.DELETE_PARTICIPANT_FAILURE, errors });

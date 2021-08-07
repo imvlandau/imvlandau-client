@@ -18,6 +18,7 @@ import TextField from "@material-ui/core/TextField";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
 import ImvFooter from "../../components/ImvFooter";
+import i18nextInstance from "../../i18nextInstance";
 import * as actionCreators from "./actions";
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, createParticipant, createParticipantFailure, ...props }) {
+function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, fetchSettings, createParticipant, createParticipantFailure, settings, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation(["participant"]);
   const didMountRef = React.useRef(false);
@@ -117,6 +118,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
     if (!didMountRef.current) {
       // mounted
       didMountRef.current = true;
+      fetchSettings();
     } else {
       // updated
       setActiveStep(activeStepProp);
@@ -134,7 +136,12 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
       <ImvAppBar />
       <Container maxWidth="lg">
         <Typography className={classes.heading} component="h1" variant="h5" sx={{mt: 1, mb:1}}>
-          {t("attendees.event.title")}
+          {t("attendees.event.subject", {
+            eventTopic: settings.eventTopic,
+            eventTime: new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : ""),
+            eventDate: new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' }),
+            eventLocation: settings.eventLocation
+         })}
         </Typography>
         <Stepper
           className={classes.stepper}
@@ -150,7 +157,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
                   "attendees.registration.section.title"
                 )}
               </Typography>
-              <Typography variant="caption">
+              <Typography variant="caption" paragraph>
                 {t(
                   "attendees.registration.section.subtitle"
                 )}
@@ -294,7 +301,8 @@ const mapStateToProps = (state, ownProps) => ({
   notifications: state.notifications.notifications,
   fetching: state.participant.fetching,
   qrCodeImageData: state.participant.qrCodeImageData,
-  activeStep: state.participant.activeStep
+  activeStep: state.participant.activeStep,
+  settings: state.settings.data
 });
 
 export default connect(
