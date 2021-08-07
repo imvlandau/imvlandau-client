@@ -1,6 +1,10 @@
 {
+  "settings.confirm.deletion.list.participants": "By confirming with \"Ok\" the current list of participants will be irrevocably deleted. Do you really want to delete the current table of participants and start a new event?",
   "settings.title": "Event settings",
   "settings.saved": "Settings saved successfully",
+  "settings.form.eventTime1.invalid": "Event time one is invalid",
+  "settings.form.eventTime2.invalid": "Event time two is invalid",
+  "settings.form.eventDate.invalid": "Event date is invalid",
   "settings.label.eventEmailTemplate": "E-Mail-text",
   "settings.label.eventEmailSubject": "E-Mail-subject",
   "settings.label.eventLocation": "Event location",

@@ -10,10 +10,13 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
-import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
-import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import Box from "@material-ui/core/Box";
 import TimePicker from "@material-ui/lab/TimePicker";
 import DatePicker from "@material-ui/lab/DatePicker";
+import LocalizationProvider from "@material-ui/lab/LocalizationProvider";
+import AdapterDateFns from "@material-ui/lab/AdapterDateFns";
+import formatISO from "date-fns/formatISO";
+import parseISO from "date-fns/parseISO";
 import deLocale from "date-fns/locale/de";
 import enLocale from "date-fns/locale/en-US";
 import arSaLocale from "date-fns/locale/ar-SA";
@@ -36,10 +39,14 @@ const maskMap = {
   "ar-PS": "__.__.____"
 };
 
+const defaultEmailSubject = `QrCode für {{ eventTopic }} um {{ eventTime }} Uhr am {{ eventDate }} in der {{ eventLocation }}`;
+const defaultEmailTemplate = `As-salāmu ʿalaikum wa-raḥmatu llāhi wa-barakātuhu {{ name }}!<br/><br/>Du hast Dich erfolgreich für {{ eventTopic }} am {{ eventDate }} um {{ eventTime }} Uhr registriert.<br/><br/>Veranstaltungsort ist {{ eventLocation }}.<br/><br/>Hier ist Dein QR-Code für den Anmeldeprozess am Eingang:<br/><br/><img src="cid:QrCode" /><br/><br/>Wir freuen uns schon auf Dich und BarakAllahu Feek(i)<br/><br/>Dein IMV-Landau e. V.`;
+
 function Settings({
   notifications,
   fetching,
   fetchSettings,
+  settings: settingsProp,
   saveSettings,
   saveSettingsFailure,
   ...props
@@ -49,46 +56,72 @@ function Settings({
   const editorRef = React.useRef(null);
 
   // ########## settings data
-  const [settings, setSettings] = React.useState({
-    eventMaximumAmount: null,
-    eventTime1: null,
-    eventTime2: null,
-    eventDate: null,
-    eventTopic: "",
-    eventLocation: "",
-    eventEmailSubject:
-      "QrCode für {{ eventTopic }} um {{ eventTime }} Uhr am {{ eventDate }} in der {{ eventLocation }}",
-    eventEmailTemplate: `As-salāmu ʿalaikum wa-raḥmatu llāhi wa-barakātuhu {{ name | title  }}!<br/><br/>Du hast Dich erfolgreich für {{ eventTopic }} am {{ eventDate }} um {{ eventTime }} Uhr registriert.<br/><br/>Veranstaltungsort ist {{ eventLocation }}.<br/><br/>Hier ist Dein QR-Code für den Anmeldeprozess am Eingang:<br/><br/><img src="cid:QrCode" /><br/><br/>Wir freuen uns schon auf Dich und BarakAllahu Feek(i)<br/><br/>Dein IMV-Landau e. V.`
-  });
+  const [settings, setSettings] = React.useState(settingsProp);
 
   // ########## stepper
   const handleSubmit = () => {
     if (
       settings.eventMaximumAmount &&
-      settings.eventTime1 &&
       settings.eventDate &&
+      settings.eventTime1 &&
       settings.eventTopic &&
       settings.eventLocation &&
       settings.eventEmailSubject &&
       settings.eventEmailTemplate
     ) {
-      saveSettings(
-        {
-          eventMaximumAmount: settings.eventMaximumAmount,
-          eventTime1: settings.eventTime1,
-          eventTime2: settings.eventTime2,
-          eventDate: settings.eventDate,
-          eventTopic: settings.eventTopic,
-          eventLocation: settings.eventLocation,
-          eventEmailSubject: settings.eventEmailSubject,
-          eventEmailTemplate: settings.eventEmailTemplate
-        },
-        {
-          key: "settings.saved",
-          message: t("settings.saved"),
-          type: "success"
+      let eventDate;
+      let eventTime1;
+      let eventTime2;
+      try {
+        try {
+          eventDate = formatISO(parseISO(settings.eventDate));
+        } catch (e) {
+          // eslint-disable-next-line
+          throw "eventDate.invalid";
         }
-      );
+        try {
+          eventTime1 = formatISO(parseISO(settings.eventTime1));
+        } catch (e) {
+          // eslint-disable-next-line
+          throw "eventTime1.invalid";
+        }
+        try {
+          eventTime2 = settings.eventTime2
+            ? formatISO(parseISO(settings.eventTime2))
+            : "";
+        } catch (e) {
+          // eslint-disable-next-line
+          throw "eventTime2.invalid";
+        }
+
+        if (window.confirm(t("settings.confirm.deletion.list.participants"))) {
+          saveSettings(
+            {
+              eventMaximumAmount: settings.eventMaximumAmount,
+              eventDate: eventDate,
+              eventTime1: eventTime1,
+              eventTime2: eventTime2,
+              eventTopic: settings.eventTopic,
+              eventLocation: settings.eventLocation,
+              eventEmailSubject: settings.eventEmailSubject,
+              eventEmailTemplate: settings.eventEmailTemplate
+            },
+            {
+              key: "settings.saved",
+              message: t("settings.saved"),
+              type: "success"
+            }
+          );
+        }
+      } catch (e) {
+        saveSettingsFailure([
+          {
+            key: `settings.form.${e}`,
+            message: t(`settings.form.${e}`),
+            type: "error"
+          }
+        ]);
+      }
     } else {
       saveSettingsFailure([
         {
@@ -105,42 +138,74 @@ function Settings({
     setSettings({ ...settings, [name]: event.target.value });
   };
   const handleChangeEventDate = newValue => {
-    settings.eventDate = newValue;
+    try {
+      settings.eventDate = formatISO(newValue);
+    } catch (e) {
+      settings.eventDate = newValue;
+    }
     setSettings({ ...settings });
   };
   const handleChangeEventTime1 = newValue => {
-    settings.eventTime1 = newValue;
+    try {
+      settings.eventTime1 = formatISO(newValue);
+    } catch (e) {
+      settings.eventTime1 = newValue;
+    }
     setSettings({ ...settings });
   };
   const handleChangeEventTime2 = newValue => {
-    settings.eventTime2 = newValue;
+    try {
+      settings.eventTime2 = formatISO(newValue);
+    } catch (e) {
+      settings.eventTime2 = newValue;
+    }
     setSettings({ ...settings });
   };
-
   const handleChangeEmailTemplate = () => {
     if (editorRef.current) {
       settings.eventEmailTemplate = editorRef.current.getContent();
-      setSettings({ ...settings });
+      setSettings(settings);
+    }
+  };
+  const handleResetEmailSubject = () => {
+    settings.eventEmailSubject = defaultEmailSubject;
+    setSettings({ ...settings });
+  };
+  const handleResetEmailTemplate = () => {
+    if (editorRef.current) {
+      settings.eventEmailTemplate = editorRef.current.setContent(
+        defaultEmailTemplate
+      );
+      setSettings(settings);
     }
   };
 
   const formNotFilledOut = notifications.filter(notification => {
     return notification.key.indexOf("settings.form.incomplete") > -1;
   });
+  const eventTopicInvalid = notifications.filter(notification => {
+    return notification.key.indexOf("settings.eventTopic") > -1;
+  });
+  const eventLocationInvalid = notifications.filter(notification => {
+    return notification.key.indexOf("settings.eventLocation") > -1;
+  });
+  const eventEmailSubjectInvalid = notifications.filter(notification => {
+    return notification.key.indexOf("settings.eventEmailSubject") > -1;
+  });
+  const eventEmailTemplateInvalid = notifications.filter(notification => {
+    return notification.key.indexOf("settings.eventEmailTemplate") > -1;
+  });
 
   React.useEffect(() => {
     if (!didMountRef.current) {
       // mounted
       didMountRef.current = true;
-      // fetchSettings();
+      fetchSettings();
     } else {
       // updated
-      // setSettings(settings => {
-      //   settings.eventTime1 = eventTime1;
-      //   return settings;
-      //  });
+      setSettings(settingsProp);
     }
-  }, [fetching, settings]);
+  }, [fetching, settingsProp, fetchSettings]);
 
   return (
     <LocalizationProvider
@@ -186,7 +251,11 @@ function Settings({
                       fullWidth
                       {...params}
                       error={Boolean(
-                        formNotFilledOut.length && !settings.eventDate
+                        (formNotFilledOut.length && !settings.eventDate) ||
+                          notifications.filter(
+                            notification =>
+                              notification.key.indexOf("eventDate") > -1
+                          ).length
                       )}
                     />
                   )}
@@ -202,7 +271,11 @@ function Settings({
                       fullWidth
                       {...params}
                       error={Boolean(
-                        formNotFilledOut.length && !settings.eventTime1
+                        (formNotFilledOut.length && !settings.eventTime1) ||
+                          notifications.filter(
+                            notification =>
+                              notification.key.indexOf("eventTime1") > -1
+                          ).length
                       )}
                     />
                   )}
@@ -213,7 +286,18 @@ function Settings({
                   label={t("settings.label.eventTime2")}
                   value={settings.eventTime2 || null}
                   onChange={handleChangeEventTime2}
-                  renderInput={params => <TextField fullWidth {...params} />}
+                  renderInput={params => (
+                    <TextField
+                      fullWidth
+                      {...params}
+                      error={Boolean(
+                        notifications.filter(
+                          notification =>
+                            notification.key.indexOf("eventTime2") > -1
+                        ).length
+                      )}
+                    />
+                  )}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -225,7 +309,8 @@ function Settings({
                   onChange={handleChangeSettings("eventTopic")}
                   variant="filled"
                   error={Boolean(
-                    formNotFilledOut.length && !settings.eventTopic
+                    (formNotFilledOut.length && !settings.eventTopic) ||
+                      eventTopicInvalid.length
                   )}
                 />
               </Grid>
@@ -238,11 +323,12 @@ function Settings({
                   onChange={handleChangeSettings("eventLocation")}
                   variant="filled"
                   error={Boolean(
-                    formNotFilledOut.length && !settings.eventLocation
+                    (formNotFilledOut.length && !settings.eventLocation) ||
+                      eventLocationInvalid.length
                   )}
                 />
               </Grid>
-              <Grid item lg={12}>
+              <Grid item xs={12}>
                 <TextField
                   id="eventEmailSubject"
                   label={t("settings.label.eventEmailSubject")}
@@ -251,11 +337,27 @@ function Settings({
                   onChange={handleChangeSettings("eventEmailSubject")}
                   variant="outlined"
                   error={Boolean(
-                    formNotFilledOut.length && !settings.eventEmailSubject
+                    (formNotFilledOut.length && !settings.eventEmailSubject) ||
+                      eventEmailSubjectInvalid.length
                   )}
                 />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    mt: 0.5
+                  }}
+                >
+                  <Button
+                    onClick={handleResetEmailSubject}
+                    variant="text"
+                    size="small"
+                  >
+                    Reset
+                  </Button>
+                </Box>
               </Grid>
-              <Grid item lg={12}>
+              <Grid item xs={12}>
                 <React.Fragment>
                   <Typography
                     component="p"
@@ -263,7 +365,9 @@ function Settings({
                     sx={{
                       ml: 2,
                       color: Boolean(
-                        formNotFilledOut.length && !settings.eventEmailTemplate
+                        (formNotFilledOut.length &&
+                          !settings.eventEmailTemplate) ||
+                          eventEmailTemplateInvalid.length
                       )
                         ? red["700"]
                         : "rgba(0, 0, 0, 0.6)"
@@ -275,9 +379,11 @@ function Settings({
                 <Editor
                   apiKey="vri9rv2g9b7the2eisul7xwtgr3fhcd6d5dq3w71e5zp9znt"
                   onInit={(evt, editor) => (editorRef.current = editor)}
-                  initialValue={settings.eventEmailTemplate}
+                  initialValue={settingsProp.eventEmailTemplate}
                   onEditorChange={handleChangeEmailTemplate}
                   init={{
+                    entity_encoding: "raw",
+                    forced_root_block: "",
                     height: 400,
                     menubar: false,
                     plugins: [
@@ -294,6 +400,21 @@ function Settings({
                       "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
                   }}
                 />
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    mt: 0.5
+                  }}
+                >
+                  <Button
+                    onClick={handleResetEmailTemplate}
+                    variant="text"
+                    size="small"
+                  >
+                    Reset
+                  </Button>
+                </Box>
               </Grid>
             </Grid>
             <Button
@@ -301,7 +422,6 @@ function Settings({
               color="primary"
               onClick={handleSubmit}
               disabled={fetching}
-              sx={{ mt: 2 }}
             >
               {t("button.next")}
               {fetching && <CircularProgress size={24} />}

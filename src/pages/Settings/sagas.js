@@ -6,8 +6,8 @@ import { addNotification, addNotifications } from "../../containers/Notification
 
 function* onSaveSettings(action) {
   try {
-    const response = yield call(SettingsService.saveSettings, action);
-    yield put(actions.saveSettingsSuccess(response));
+    yield call(SettingsService.saveSettings, action);
+    yield put(actions.saveSettingsSuccess(action.params));
     yield put(addNotification(action.successNotification));
   } catch (errors) {
     yield put(actions.saveSettingsFailure(errors));

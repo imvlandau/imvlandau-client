@@ -1,8 +1,17 @@
 import * as constants from "./constants";
 
 export const initialState = {
-  fetching: false,
-  data: null
+  fetching: true,
+  data: {
+    eventMaximumAmount: null,
+    eventDate: null,
+    eventTime1: null,
+    eventTime2: null,
+    eventTopic: "",
+    eventLocation: "",
+    eventEmailSubject: "",
+    eventEmailTemplate: ""
+  }
 };
 
 export default function reducer(state = initialState, action) {
@@ -14,7 +23,8 @@ export default function reducer(state = initialState, action) {
     case constants.SAVE_SETTINGS_SUCCESS:
       return {
         ...state,
-        fetching: false
+        fetching: false,
+        data: action.data
       };
 
     case constants.SAVE_SETTINGS_FAILURE:

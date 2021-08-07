@@ -1,6 +1,10 @@
 {
+  "settings.confirm.deletion.list.participants": "Durch das bestätigen mit \"Ok\" wird die aktuelle Liste der Teilnehmer unwiderruflich gelöscht. Möchten Sie die aktuelle Liste löschen und eine neue Veranstaltung beginnen?",
   "settings.title": "Veranstaltungseinstellungen",
   "settings.saved": "Einstellungen erfolgreich gespeichert",
+  "settings.form.eventTime1.invalid": "Veranstaltungsuhrzeit eins ist ungültig",
+  "settings.form.eventTime2.invalid": "Veranstaltungsuhrzeit zwei ist ungültig",
+  "settings.form.eventDate.invalid": "Veranstaltungsdatum ist ungültig",
   "settings.label.eventEmailTemplate": "E-Mail-Text",
   "settings.label.eventEmailSubject": "E-Mail-Betreff",
   "settings.label.eventLocation": "Veranstaltungsort",
