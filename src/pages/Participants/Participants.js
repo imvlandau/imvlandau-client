@@ -167,7 +167,7 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
       // updated
       setParticipants(participantsProp);
     }
-  }, [fetchParticipants, participantsProp]);
+  }, [fetchParticipants, participantsProp, fetchSettings]);
 
   return (
     <React.Fragment>

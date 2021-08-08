@@ -127,7 +127,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
         return participant;
        });
     }
-  }, [fetching, activeStepProp, qrCodeImageDataProp]);
+  }, [fetching, activeStepProp, qrCodeImageDataProp, fetchSettings]);
 
   return (
     <React.Fragment>
