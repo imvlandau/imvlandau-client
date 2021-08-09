@@ -4,9 +4,10 @@ import {
   responsiveFontSizes
 } from "@material-ui/core/styles";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import grey from "@material-ui/core/colors/grey";
+import { Auth0Provider } from "./reactAuth0Spa";
 import Home from "./pages/Home";
 import Participant from './pages/Participant';
 import Participants from './pages/Participants';
@@ -56,6 +57,7 @@ const defaultTitle = window.location.hostname.indexOf('playmobox') !== -1 ? "Pla
 const content = window.location.hostname.indexOf('playmobox') !== -1 ? "Playmobox is a high-end web application editor" : "Imv-landau - Islamischer multikultureller Verein in Landau";
 
 function App() {
+  let history = useHistory();
   return (
     <HelmetProvider>
       <Helmet
@@ -70,12 +72,25 @@ function App() {
       />
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={window.location.hostname.indexOf('playmobox') !== -1 ? Home : Participant} />
-            <Route exact path="/participants" component={Participants} />
-            <Route exact path="/settings" component={Settings} />
-          </Switch>
+        <BrowserRouter history={history}>
+          <Auth0Provider
+          domain={process.env.REACT_APP_AUTH0_DOMAIN}
+          client_id={process.env.REACT_APP_AUTH0_CLIENT_ID}
+          redirect_uri={window.location.origin}
+          onRedirectCallback={appState => { // A function that routes the user to the right place after login
+            history.push(
+              appState && appState.targetUrl
+              ? appState.targetUrl
+              : window.location.pathname
+            );
+          }}
+          >
+            <Switch>
+              <Route exact path="/" component={window.location.hostname.indexOf('playmobox') !== -1 ? Home : Participant} />
+              <Route exact path="/participants" component={Participants} />
+              <Route exact path="/settings" component={Settings} />
+            </Switch>
+          </Auth0Provider>
         </BrowserRouter>
       </ThemeProvider>
     </HelmetProvider>
