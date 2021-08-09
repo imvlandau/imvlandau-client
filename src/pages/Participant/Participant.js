@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/styles";
@@ -129,6 +129,13 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
     }
   }, [fetching, activeStepProp, qrCodeImageDataProp, fetchSettings]);
 
+  let eventTime = useMemo(() => {
+    return new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 && settings.eventTime1 !== settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : "");
+  }, [settings]);
+  let eventDate = useMemo(() => {
+    return new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' });
+  }, [settings]);
+
   return (
     <React.Fragment>
       <Helmet title={t("attendees.registration.section.name")} />
@@ -138,8 +145,8 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
         <Typography className={classes.heading} component="h1" variant="h5" sx={{mt: 1, mb:1}}>
           {t("attendees.event.subject", {
             eventTopic: settings.eventTopic,
-            eventTime: new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : ""),
-            eventDate: new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' }),
+            eventTime,
+            eventDate,
             eventLocation: settings.eventLocation
          })}
         </Typography>
