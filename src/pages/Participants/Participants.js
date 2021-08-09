@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useRef, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
@@ -169,6 +169,13 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
     }
   }, [fetchParticipants, participantsProp, fetchSettings]);
 
+  let eventTime = useMemo(() => {
+    return new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 && settings.eventTime1 !== settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : "");
+  }, [settings]);
+  let eventDate = useMemo(() => {
+    return new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' });
+  }, [settings]);
+
   return (
     <React.Fragment>
       <Helmet title={t("attendees.registration.section.name")} />
@@ -179,8 +186,8 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
         {
           t("attendees.event.subject", {
             eventTopic: settings.eventTopic,
-            eventTime: new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : ""),
-            eventDate: new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' }),
+            eventTime,
+            eventDate,
             eventLocation: settings.eventLocation
           })
         }
