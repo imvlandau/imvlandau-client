@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useMemo } from "react";
+import React, { forwardRef, useRef, useMemo, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
@@ -95,7 +95,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       export: false,
       field: "companions",
       title: t("attendees.companions.section.title"),
-      render: rowData => (
+      render: useCallback(rowData => (
         <React.Fragment>
           <Box display="flex">
             {rowData.companion1 && (
@@ -118,7 +118,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
             ) : null}
           </Box>
         </React.Fragment>
-      )
+      ), [])
     },
     {
       readonly: true,
