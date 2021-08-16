@@ -424,7 +424,7 @@ function Settings({
               disabled={fetching}
             >
               {t("button.next")}
-              {fetching && <CircularProgress size={24} />}
+              {fetching && <CircularProgress sx={{ ml: 1 }} size={24} />}
             </Button>
           </form>
         </Paper>

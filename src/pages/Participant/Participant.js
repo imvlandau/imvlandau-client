@@ -144,10 +144,10 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
       <Container maxWidth="lg">
         <Typography className={classes.heading} component="h1" variant="h5" sx={{mt: 1, mb:1}}>
           {t("attendees.event.subject", {
-            eventTopic: settings.eventTopic,
+            eventTopic: settings.eventTopic || '...',
             eventTime,
             eventDate,
-            eventLocation: settings.eventLocation
+            eventLocation: settings.eventLocation || '...'
          })}
         </Typography>
         <Stepper

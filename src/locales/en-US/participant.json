@@ -3,7 +3,7 @@
   "attendees.event.subject": "Registration for {{ eventTopic }} at {{ eventTime }} o'clock on {{ eventDate }} at {{ eventLocation }}",
   "attendees.registration.section.name": "Registration",
   "attendees.registration.section.title": "Here you can register yourself and your companions.",
-  "attendees.registration.section.subtitle": "By filling in this formular you will get a QR-Code to your E-Mail, which is necessary for entering this event.",
+  "attendees.registration.section.subtitle": "Afterwards you will get a QR-Code to your E-Mail, which you can show at the entrance to speed up the registration process.",
   "attendees.registration.complete": "Registration complete. You should soon receive an E-Mail from us.",
   "attendees.companions.section.title": "Accompanied by...",
   "attendees.companions.section.title.abbr": "Acc.",

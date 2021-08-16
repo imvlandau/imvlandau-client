@@ -3,7 +3,7 @@
   "attendees.event.subject": "Registrierung für {{ eventTopic }} um {{ eventTime }} Uhr am {{ eventDate }} in der {{ eventLocation }}",
   "attendees.registration.section.name": "Anmeldung",
   "attendees.registration.section.title": "Hier können Sie sich und Ihre Angehörige registrieren.",
-  "attendees.registration.section.subtitle": "Durch ausfüllen des Formulars bekommen Sie an die hier eingegebene E-Mail-Adresse einen QR-Code zugesendet, um im Eingangsbereich um einen reibungslosen und schnellen Anmeldungsprozess zu ermöglichen.",
+  "attendees.registration.section.subtitle": "Im Anschnluss bekommen Sie an die hier eingegebene E-Mail-Adresse einen QR-Code zugesendet, den Sie am Eingangsbereich vorzeigen können.",
   "attendees.registration.complete": "Ihre Anmeldung war erfolgreich. Bitte schauen Sie in Ihrer E-Mail nach.",
   "attendees.companions.section.title": "In Begleitung von...",
   "attendees.companions.section.title.abbr": "Begl.",

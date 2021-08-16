@@ -181,14 +181,14 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
       <Helmet title={t("attendees.registration.section.name")} />
       <Notifications />
       <ImvAppBar />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Typography component="h1" variant="h5" sx={{mt: 1, mb:1}}>
         {
           t("attendees.event.subject", {
-            eventTopic: settings.eventTopic,
+            eventTopic: settings.eventTopic || '...',
             eventTime,
             eventDate,
-            eventLocation: settings.eventLocation
+            eventLocation: settings.eventLocation || '...'
           })
         }
         </Typography>

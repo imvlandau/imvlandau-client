@@ -13,18 +13,9 @@ import PmbFlag from "./PmbFlag";
 import http from "../services/http";
 
 const useStyles = makeStyles(theme => ({
-  button: {
-    fontStyle: "italic",
-    marginRight: theme.spacing(1),
-    padding: theme.spacing(1, 2),
-    lineHeight: 1.5
-  },
   buttonIcon: {
     width: "1.2rem",
     height: "1.2rem"
-  },
-  listItemIcon: {
-    minWidth: "48px"
   },
   selectedFlag: {
     marginRight: theme.spacing(1 / 2)
@@ -97,7 +88,7 @@ function PmbLanguageDropdown({
       <Button
         aria-haspopup="true"
         aria-owns={open ? "choose-language-menu" : null}
-        classes={{ root: classes.button }}
+        sx={{ fontWeight: "light", fontStyle: "italic", mr: 1 }}
         color="inherit"
         onClick={handleOpen}
         title={t(label)}
@@ -126,7 +117,7 @@ function PmbLanguageDropdown({
             onClick={event => handleChooseLanguage(language)}
             selected={language.lacc === selected.lacc}
           >
-            <ListItemIcon className={classes.listItemIcon}>
+            <ListItemIcon>
               <PmbFlag
                 alt={`Flag of ${language.name.common}`}
                 format="png"
