@@ -14,7 +14,7 @@ import { GoFlame } from "react-icons/go";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import PmbNavBar from "../../components/PmbNavBar";
+import ImvAppBar from "../../components/ImvAppBar";
 import PmbFooter from "../../components/PmbFooter";
 
 const useStyles = makeStyles(theme => ({
@@ -103,7 +103,7 @@ export default function Home() {
   return (
     <React.Fragment>
       <Helmet title="Home" />
-      <PmbNavBar />
+      <ImvAppBar />
       <Box p={4}>
         <Grid container spacing={5}>
           <Grid
