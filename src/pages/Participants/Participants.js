@@ -10,6 +10,8 @@ import { useTheme } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import { useAuth0 } from "@auth0/auth0-react";
+import { authorized } from "../../services/http";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
 import ImvFooter from "../../components/ImvFooter";
@@ -57,12 +59,11 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 };
 
-function Participants({ participants: participantsProp, fetchParticipants, fetching, fetchSettings, settings, ...props }) {
+function Participants({ participants, fetchParticipants, fetchParticipantsFailure, fetching, fetchSettings, settings, ...props }) {
   const didMountRef = useRef(false);
   const theme = useTheme();
   const { t } = useTranslation(["participant"]);
-
-  const [participants, setParticipants] = React.useState(participantsProp);
+  const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
   const columns = [
     {
@@ -161,13 +162,27 @@ function Participants({ participants: participantsProp, fetchParticipants, fetch
     if (!didMountRef.current) {
       // mounted
       didMountRef.current = true;
-      fetchParticipants();
-      fetchSettings();
+      (async () => {
+        try {
+          const token = await getAccessTokenSilently();
+          const token_raw = await getIdTokenClaims();
+          token_raw && authorized(token_raw.__raw);
+          fetchSettings();
+          fetchParticipants();
+        } catch (error) {
+          fetchParticipantsFailure([
+            {
+              key: "common.login.required",
+              message: error.message,
+              type: "error"
+            }
+          ]);
+        }
+      })();
     } else {
       // updated
-      setParticipants(participantsProp);
     }
-  }, [fetchParticipants, participantsProp, fetchSettings]);
+  }, [fetchParticipants, fetchSettings]);
 
   let eventTime = useMemo(() => {
     return new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 && settings.eventTime1 !== settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : "");

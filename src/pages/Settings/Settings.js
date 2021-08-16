@@ -22,6 +22,8 @@ import enLocale from "date-fns/locale/en-US";
 import arSaLocale from "date-fns/locale/ar-SA";
 import { Editor } from "@tinymce/tinymce-react";
 import * as actionCreators from "./actions";
+import { useAuth0 } from "@auth0/auth0-react";
+import { authorized } from "../../services/http";
 import i18nextInstance from "../../i18nextInstance";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
@@ -54,6 +56,7 @@ function Settings({
   const { t } = useTranslation(["settings"]);
   const didMountRef = React.useRef(false);
   const editorRef = React.useRef(null);
+  const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
 
   // ########## settings data
   const [settings, setSettings] = React.useState(settingsProp);
@@ -95,23 +98,38 @@ function Settings({
         }
 
         if (window.confirm(t("settings.confirm.deletion.list.participants"))) {
-          saveSettings(
-            {
-              eventMaximumAmount: settings.eventMaximumAmount,
-              eventDate: eventDate,
-              eventTime1: eventTime1,
-              eventTime2: eventTime2,
-              eventTopic: settings.eventTopic,
-              eventLocation: settings.eventLocation,
-              eventEmailSubject: settings.eventEmailSubject,
-              eventEmailTemplate: settings.eventEmailTemplate
-            },
-            {
-              key: "settings.saved",
-              message: t("settings.saved"),
-              type: "success"
+          (async () => {
+            try {
+              const token = await getAccessTokenSilently();
+              const token_raw = await getIdTokenClaims();
+              token_raw && authorized(token_raw.__raw);
+              saveSettings(
+                {
+                  eventMaximumAmount: settings.eventMaximumAmount,
+                  eventDate: eventDate,
+                  eventTime1: eventTime1,
+                  eventTime2: eventTime2,
+                  eventTopic: settings.eventTopic,
+                  eventLocation: settings.eventLocation,
+                  eventEmailSubject: settings.eventEmailSubject,
+                  eventEmailTemplate: settings.eventEmailTemplate
+                },
+                {
+                  key: "settings.saved",
+                  message: t("settings.saved"),
+                  type: "success"
+                }
+              );
+            } catch (error) {
+              saveSettingsFailure([
+                {
+                  key: "common.login.required",
+                  message: error.message,
+                  type: "error"
+                }
+              ]);
             }
-          );
+          })();
         }
       } catch (e) {
         saveSettingsFailure([

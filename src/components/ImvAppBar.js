@@ -1,10 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import Box from "@material-ui/core/Box";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import ImvBrand from "./ImvBrand";
 import PmbLanguageDropdown from "./PmbLanguageDropdown";
+import PmbProfileMenu from "./PmbProfileMenu";
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ImvAppBar() {
+function ImvAppBar({ showProfileMenu = true}) {
   const classes = useStyles();
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -23,6 +25,7 @@ function ImvAppBar() {
         <Toolbar className={classes.toolbar}>
           <ImvBrand />
           <div className={classes.divider} />
+          {showProfileMenu && <PmbProfileMenu />}
           <PmbLanguageDropdown
             languages={[
               { lacc: "de-DE", cca2: "DE", cca3: "DEU" },
@@ -36,5 +39,9 @@ function ImvAppBar() {
     </Box>
   );
 }
+
+ImvAppBar.propTypes = {
+  showProfileMenu: PropTypes.bool
+};
 
 export default ImvAppBar;
