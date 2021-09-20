@@ -347,29 +347,26 @@ function Settings({
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  id="eventEmailSubject"
-                  label={t("settings.label.eventEmailSubject")}
-                  fullWidth
-                  value={settings.eventEmailSubject || ""}
-                  onChange={handleChangeSettings("eventEmailSubject")}
-                  variant="outlined"
-                  error={Boolean(
-                    (formNotFilledOut.length && !settings.eventEmailSubject) ||
-                      eventEmailSubjectInvalid.length
-                  )}
-                />
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    mt: 0.5
-                  }}
-                >
+                <Box sx={{ display: "flex" }}>
+                  <TextField
+                    id="eventEmailSubject"
+                    label={t("settings.label.eventEmailSubject")}
+                    fullWidth
+                    value={settings.eventEmailSubject || ""}
+                    onChange={handleChangeSettings("eventEmailSubject")}
+                    variant="outlined"
+                    error={Boolean(
+                      (formNotFilledOut.length &&
+                        !settings.eventEmailSubject) ||
+                        eventEmailSubjectInvalid.length
+                    )}
+                  />
                   <Button
                     onClick={handleResetEmailSubject}
-                    variant="text"
-                    size="small"
+                    variant="outlined"
+                    sx={{
+                      ml: 1
+                    }}
                   >
                     Reset
                   </Button>
@@ -427,7 +424,7 @@ function Settings({
                 >
                   <Button
                     onClick={handleResetEmailTemplate}
-                    variant="text"
+                    variant="outlined"
                     size="small"
                   >
                     Reset
