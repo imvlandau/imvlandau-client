@@ -89,15 +89,15 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
             companion3: participant.companion3,
             companion4: participant.companion4
           },{
-            key: "attendees.registration.complete",
+            key: "participant.registration.complete",
             message: t(
-              "attendees.registration.complete"
+              "participant.registration.complete"
             ),
             type: "success"
           });
       } else {
         createParticipantFailure([{
-          key: "attendees.form.incomplete",
+          key: "participant.form.incomplete",
           message: t("notification.form.incomplete"),
           type: "error"
         }]);
@@ -111,7 +111,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
   };
 
   const formNotFilledOut = notifications.filter(notification => {
-    return notification.key.indexOf("attendees.form.incomplete") > -1;
+    return notification.key.indexOf("participant.form.incomplete") > -1;
   });
 
   React.useEffect(() => {
@@ -138,12 +138,12 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
 
   return (
     <React.Fragment>
-      <Helmet title={t("attendees.registration.section.name")} />
+      <Helmet title={t("participant.registration.section.name")} />
       <Notifications />
       <ImvAppBar />
       <Container maxWidth="lg">
         <Typography className={classes.heading} component="h1" variant="h5" sx={{mt: 1, mb:1}}>
-          {t("attendees.event.subject", {
+          {t("participant.event.subject", {
             eventTopic: settings.eventTopic || '...',
             eventTime,
             eventDate,
@@ -157,16 +157,16 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
           sx={{ p: 1 }}
         >
           <Step key="event-registration">
-            <StepLabel>{t("attendees.registration.section.name")}</StepLabel>
+            <StepLabel>{t("participant.registration.section.name")}</StepLabel>
             <StepContent>
               <Typography variant="h6">
                 {t(
-                  "attendees.registration.section.title"
+                  "participant.registration.section.title"
                 )}
               </Typography>
               <Typography variant="caption" paragraph>
                 {t(
-                  "attendees.registration.section.subtitle"
+                  "participant.registration.section.subtitle"
                 )}
               </Typography>
               <form noValidate autoComplete="off">
@@ -220,13 +220,13 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
                   className={classes.headingParticipantSettings}
                    sx={{mt: 1}}
                 >
-                  {t("attendees.companions.section.title")}
+                  {t("participant.companions.section.title")}
                 </Typography>
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("attendees.companions.label.first.companion")}
+                      label={t("participant.companions.label.first.companion")}
                       className={classes.textField}
                       fullWidth
                       value={participant.companion1 || ""}
@@ -237,7 +237,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("attendees.companions.label.second.companion")}
+                      label={t("participant.companions.label.second.companion")}
                       className={classes.textField}
                       fullWidth
                       value={participant.companion2 || ""}
@@ -248,7 +248,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("attendees.companions.label.third.companion")}
+                      label={t("participant.companions.label.third.companion")}
                       className={classes.textField}
                       fullWidth
                       value={participant.companion3 || ""}
@@ -259,7 +259,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
                   <Grid item xs={12} sm={3}>
                     <TextField
                       id="label"
-                      label={t("attendees.companions.label.fourth.companion")}
+                      label={t("participant.companions.label.fourth.companion")}
                       className={classes.textField}
                       fullWidth
                       value={participant.companion4 || ""}
@@ -283,13 +283,13 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
             </StepContent>
           </Step>
           <Step key="event-registration-confirmation">
-            <StepLabel>{t("attendees.confirmation.section.name")}</StepLabel>
+            <StepLabel>{t("participant.confirmation.section.name")}</StepLabel>
             <StepContent>
               <Typography variant="caption" paragraph>
-                {t(`attendees.confirmation.section.subtitle.beginning`)}
+                {t(`participant.confirmation.section.subtitle.beginning`)}
                  <Box color="warning.dark" component="span" fontFamily="Monospace">{participant.email}</Box>
                 {t(
-                  `attendees.confirmation.section.subtitle.end`
+                  `participant.confirmation.section.subtitle.end`
                 )}
               </Typography>
               <Box display="flex" justifyContent="center">

@@ -94,7 +94,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       readonly: true,
       export: false,
       field: "companions",
-      title: t("attendees.companions.section.title"),
+      title: t("participant.companions.section.title"),
       render: useCallback(rowData => (
         <React.Fragment>
           <Box display="flex">
@@ -122,7 +122,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
     },
     {
       readonly: true,
-      title: t("attendees.companions.section.title.abbr"),
+      title: t("participant.companions.section.title.abbr"),
       hidden: true,
       export: true,
       field: "companion1",
@@ -153,7 +153,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       readonly: false,
       export: true,
       field: "hasBeenScanned",
-      title: t("attendees.has.been.scanned"),
+      title: t("participant.has.been.scanned"),
       lookup: { false: t("label.no"), true: t("label.yes") }
     }
   ];
@@ -182,13 +182,13 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
 
   return (
     <React.Fragment>
-      <Helmet title={t("attendees.registration.section.name")} />
+      <Helmet title={t("participant.registration.section.name")} />
       <Notifications />
       <ImvAppBar />
       <Container maxWidth="xl">
         <Typography component="h1" variant="h5" sx={{mt: 1, mb:1}}>
         {
-          t("attendees.event.subject", {
+          t("participant.event.subject", {
             eventTopic: settings.eventTopic || '...',
             eventTime,
             eventDate,
@@ -203,7 +203,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
               emptyDataSourceMessage: (
                 <React.Fragment>
                   <Typography variant="h4" color="primary" gutterBottom>
-                    {t("attendees.no.attendees.registered.yet")}
+                    {t("participant.no.participant.registered.yet")}
                   </Typography>
                 </React.Fragment>
               )
@@ -261,10 +261,10 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
           actions={[
             rowData => ({
               icon: tableIcons.Delete,
-              tooltip: t("attendees.delete.tooltip"),
+              tooltip: t("participant.delete.tooltip"),
               onClick: (event, rowData) => {
                 if (
-                  window.confirm(t("attendees.delete.dialog.message") + rowData.name)
+                  window.confirm(t("participant.delete.dialog.message") + rowData.name)
                 ) {
                   props.deleteParticipant(rowData.id);
                 }

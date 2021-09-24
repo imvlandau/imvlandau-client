@@ -111,14 +111,14 @@ export default function PmbProfileMenu() {
           <ListItemIcon>
             <EventAvailable fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary={t("attendees.registration.section.name")} />
+          <ListItemText primary={t("participant.registration.section.name")} />
         </MenuItem>
 
         <MenuItem component={Link} to="/participants">
           <ListItemIcon>
             <ListIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary={t("button.label.attendees")} />
+          <ListItemText primary={t("button.label.participant")} />
         </MenuItem>
 
         <MenuItem component={Link} to="/settings">
