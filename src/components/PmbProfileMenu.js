@@ -52,7 +52,7 @@ export default function PmbProfileMenu() {
     </Button>
   ) : !isAuthenticated || !user ? (
     <Button
-      sx={{ fontStyle:"italic", fontWeight: 'light', mr:1 }}
+      sx={{ fontStyle: "italic", fontWeight: "light", mr: 1 }}
       color="inherit"
       onClick={() => loginWithRedirect()}
     >
@@ -90,7 +90,7 @@ export default function PmbProfileMenu() {
             primary={`${t("button.label.signed.in.as")} ${user.nickname}`}
           />
         </MenuItem>
-{/**/}
+
         <MenuItem component={Link} to="/profile">
           <ListItemIcon>
             <PersonIcon fontSize="small" />
