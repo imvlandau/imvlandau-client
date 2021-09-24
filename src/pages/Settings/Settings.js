@@ -237,6 +237,7 @@ function Settings({
                   error={Boolean(
                     formNotFilledOut.length && !settings.eventMaximumAmount
                   )}
+                  required
                   autoFocus
                   id="eventMaximumAmount"
                   label={t("settings.label.eventMaximumAmount")}
@@ -309,6 +310,7 @@ function Settings({
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required
                   id="eventTopic"
                   label={t("settings.label.eventTopic")}
                   fullWidth
@@ -323,6 +325,7 @@ function Settings({
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required
                   id="eventLocation"
                   label={t("settings.label.eventLocation")}
                   fullWidth
@@ -338,6 +341,7 @@ function Settings({
               <Grid item xs={12}>
                 <Box sx={{ display: "flex" }}>
                   <TextField
+                    required
                     id="eventEmailSubject"
                     label={t("settings.label.eventEmailSubject")}
                     fullWidth
