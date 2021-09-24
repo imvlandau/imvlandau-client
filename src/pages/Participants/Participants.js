@@ -63,7 +63,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
   const didMountRef = useRef(false);
   const theme = useTheme();
   const { t } = useTranslation(["participant"]);
-  const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
   const columns = [
     {
@@ -163,21 +163,10 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       // mounted
       didMountRef.current = true;
       (async () => {
-        try {
           const token = await getAccessTokenSilently();
-          const token_raw = await getIdTokenClaims();
-          token_raw && authorized(token_raw.__raw);
+          token && authorized(token);
           fetchSettings();
           fetchParticipants();
-        } catch (error) {
-          fetchParticipantsFailure([
-            {
-              key: "common.login.required",
-              message: error.message,
-              type: "error"
-            }
-          ]);
-        }
       })();
     } else {
       // updated

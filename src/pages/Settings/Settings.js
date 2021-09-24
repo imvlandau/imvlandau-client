@@ -56,7 +56,7 @@ function Settings({
   const { t } = useTranslation(["settings"]);
   const didMountRef = React.useRef(false);
   const editorRef = React.useRef(null);
-  const { getAccessTokenSilently, getIdTokenClaims } = useAuth0();
+  const { getAccessTokenSilently } = useAuth0();
 
   // ########## settings data
   const [settings, setSettings] = React.useState(settingsProp);
@@ -99,10 +99,8 @@ function Settings({
 
         if (window.confirm(t("settings.confirm.deletion.list.participants"))) {
           (async () => {
-            try {
               const token = await getAccessTokenSilently();
-              const token_raw = await getIdTokenClaims();
-              token_raw && authorized(token_raw.__raw);
+              token && authorized(token);
               saveSettings(
                 {
                   eventMaximumAmount: settings.eventMaximumAmount,
@@ -120,15 +118,6 @@ function Settings({
                   type: "success",
                 }
               );
-            } catch (error) {
-              saveSettingsFailure([
-                {
-                  key: "common.login.required",
-                  message: error.message,
-                  type: "error"
-                }
-              ]);
-            }
           })();
         }
       } catch (e) {
@@ -455,7 +444,4 @@ const mapStateToProps = (state, ownProps) => ({
   settings: state.settings.data,
 });
 
-export default connect(
-  mapStateToProps,
-  actionCreators
-)(Settings);
+export default connect(mapStateToProps, actionCreators)(Settings);

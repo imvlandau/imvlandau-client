@@ -76,9 +76,10 @@ function App() {
         <Router>
           <Auth0ProviderWithHistory>
             <Switch>
-              <Route exact path="/" component={window.location.hostname.indexOf('playmobox') !== -1 ? Home : Participant} />
-              <Route exact path="/participants" component={Participants} />
-              <Route exact path="/settings" component={Settings} />
+              <Route exact path="/" component={Participant} />
+              <Route exact path="/participant" component={Participant} />
+              <PrivateRoute exact path="/participants" component={Participants} />
+              <PrivateRoute exact path="/settings" component={Settings} />
               <PrivateRoute exact path="/profile" component={Profile} />
             </Switch>
           </Auth0ProviderWithHistory>
