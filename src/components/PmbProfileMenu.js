@@ -9,13 +9,16 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 import PersonIcon from "@material-ui/icons/Person";
+import EventAvailable from "@material-ui/icons/EventAvailable";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import ListIcon from '@material-ui/icons/List';
 import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
+import SettingsIcon from '@material-ui/icons/Settings';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Avatar from "@material-ui/core/Avatar";
 
 export default function PmbProfileMenu() {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["participant"]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const {
     isAuthenticated,
@@ -54,7 +57,13 @@ export default function PmbProfileMenu() {
     <Button
       sx={{ fontStyle: "italic", fontWeight: "light", mr: 1 }}
       color="inherit"
-      onClick={() => loginWithRedirect()}
+      onClick={() => {
+        loginWithRedirect({
+          appState: {
+            returnTo: window.location.pathname,
+          },
+        });
+      }}
     >
       <PersonIcon fontSize="small" />
       {t("button.label.sign.in")}
@@ -98,11 +107,25 @@ export default function PmbProfileMenu() {
           <ListItemText primary={t("button.label.your.profile")} />
         </MenuItem>
 
+        <MenuItem component={Link} to="/participant">
+          <ListItemIcon>
+            <EventAvailable fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary={t("attendees.registration.section.name")} />
+        </MenuItem>
+
         <MenuItem component={Link} to="/participants">
           <ListItemIcon>
-            <PersonIcon fontSize="small" />
+            <ListIcon fontSize="small" />
           </ListItemIcon>
           <ListItemText primary={t("button.label.attendees")} />
+        </MenuItem>
+
+        <MenuItem component={Link} to="/settings">
+          <ListItemIcon>
+            <SettingsIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary={t("button.label.settings")} />
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>
