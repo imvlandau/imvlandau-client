@@ -51,14 +51,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImageData: qrCodeImageDataProp = null, fetching, fetchSettings, createParticipant, createParticipantFailure, settings, ...props }) {
+function Participant({ notifications, activeStep = 0, qrCodeImageData = null, fetching, fetchSettings, createParticipant, createParticipantFailure, settings, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation(["participant"]);
   const didMountRef = React.useRef(false);
-
-  // ########## stepper
-  const [activeStep, setActiveStep] = React.useState(activeStepProp);
-  const amountOfSteps = 1;
 
   // ########## participant data
   const [participant, setParticipant] = React.useState({
@@ -68,13 +64,11 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
     companion1: "",
     companion2: "",
     companion3: "",
-    companion4: "",
-    qrCodeImageData: null
+    companion4: ""
   });
 
   // ########## stepper
   const handleNext = () => {
-    if (activeStep === amountOfSteps - 1) {
       if (
         participant.name &&
         participant.email &&
@@ -102,7 +96,6 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
           type: "error"
         }]);
       }
-    }
   };
 
   // ########## participant data
@@ -121,13 +114,8 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
       fetchSettings();
     } else {
       // updated
-      setActiveStep(activeStepProp);
-      setParticipant(participant => {
-        participant.qrCodeImageData = qrCodeImageDataProp;
-        return participant;
-       });
     }
-  }, [fetching, activeStepProp, qrCodeImageDataProp, fetchSettings]);
+  }, [fetching, activeStep, qrCodeImageData, fetchSettings]);
 
   let eventTime = useMemo(() => {
     return new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 && settings.eventTime1 !== settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : "");
@@ -293,7 +281,7 @@ function Participant({ notifications, activeStep: activeStepProp = 0, qrCodeImag
                 )}
               </Typography>
               <Box display="flex" justifyContent="center">
-                <img src={participant.qrCodeImageData} alt="qrcode"></img>
+                <img src={qrCodeImageData} alt="qrcode"></img>
               </Box>
             </StepContent>
           </Step>
