@@ -64,7 +64,6 @@ function Participant({
 }) {
   const classes = useStyles();
   const { t } = useTranslation(["participant"]);
-  const didMountRef = React.useRef(false);
 
   // ########## participant data
   const [participant, setParticipant] = React.useState({
@@ -117,14 +116,8 @@ function Participant({
   });
 
   React.useEffect(() => {
-    if (!didMountRef.current) {
-      // mounted
-      didMountRef.current = true;
-      fetchSettings();
-    } else {
-      // updated
-    }
-  }, [fetching, activeStep, qrCodeImageData, fetchSettings]);
+    fetchSettings();
+  }, []);
 
   let eventTime = useMemo(() => {
     return (
