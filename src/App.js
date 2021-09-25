@@ -76,7 +76,7 @@ function App() {
         <Router>
           <Auth0ProviderWithHistory>
             <Switch>
-              <Route exact path="/" component={Participant} />
+              <Route exact path="/" component={window.location.hostname.indexOf('imv-landau') > -1 ? Participant : Home} />
               <Route exact path="/participant" component={Participant} />
               <PrivateRoute exact path="/participants" component={Participants} />
               <PrivateRoute exact path="/settings" component={Settings} />
