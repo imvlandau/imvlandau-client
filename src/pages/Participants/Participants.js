@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useMemo, useCallback } from "react";
+import React, { forwardRef, useMemo, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
@@ -60,7 +60,6 @@ const tableIcons = {
 };
 
 function Participants({ participants, fetchParticipants, fetchParticipantsFailure, fetching, fetchSettings, settings, ...props }) {
-  const didMountRef = useRef(false);
   const theme = useTheme();
   const { t } = useTranslation(["participant"]);
   const { getAccessTokenSilently } = useAuth0();
@@ -159,18 +158,12 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
   ];
 
   React.useEffect(() => {
-    if (!didMountRef.current) {
-      // mounted
-      didMountRef.current = true;
-      (async () => {
-          const token = await getAccessTokenSilently();
-          token && authorized(token);
-          fetchSettings();
-          fetchParticipants();
-      })();
-    } else {
-      // updated
-    }
+    (async () => {
+      const token = await getAccessTokenSilently();
+      token && authorized(token);
+      fetchSettings();
+      fetchParticipants();
+    })();
   }, [fetchParticipants, fetchSettings]);
 
   let eventTime = useMemo(() => {
