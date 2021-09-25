@@ -3,8 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
 import MaterialTable from "@material-table/core";
-import { ExportPdf } from '@material-table/exporters';
-import { CsvBuilder } from 'filefy';
+import { ExportPdf } from "@material-table/exporters";
+import { CsvBuilder } from "filefy";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
@@ -56,10 +56,18 @@ const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-function Participants({ participants, fetchParticipants, fetchParticipantsFailure, fetching, fetchSettings, settings, ...props }) {
+function Participants({
+  participants,
+  fetchParticipants,
+  fetchParticipantsFailure,
+  fetching,
+  fetchSettings,
+  settings,
+  ...props
+}) {
   const theme = useTheme();
   const { t } = useTranslation(["participant"]);
   const { getAccessTokenSilently } = useAuth0();
@@ -69,55 +77,58 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       readonly: true,
       export: true,
       field: "token",
-      title: t("label.token")
+      title: t("label.token"),
     },
     {
       readonly: true,
       export: true,
       field: "name",
-      title: t("label.pre.and.last.name")
+      title: t("label.pre.and.last.name"),
     },
     {
       readonly: true,
       export: true,
       field: "email",
-      title: t("label.email")
+      title: t("label.email"),
     },
     {
       readonly: true,
       export: true,
       field: "mobile",
-      title: t("label.mobile")
+      title: t("label.mobile"),
     },
     {
       readonly: true,
       export: false,
       field: "companions",
       title: t("participant.companions.section.title"),
-      render: useCallback(rowData => (
-        <React.Fragment>
-          <Box display="flex">
-            {rowData.companion1 && (
-              <React.Fragment>{rowData.companion1}</React.Fragment>
-            )}
-            {rowData.companion1 && rowData.companion2 ? (
-              <React.Fragment>, {rowData.companion2}</React.Fragment>
-            ) : rowData.companion2 ? (
-              <React.Fragment>{rowData.companion2}</React.Fragment>
-            ) : null}
-            {rowData.companion2 && rowData.companion3 ? (
-              <React.Fragment>, {rowData.companion3}</React.Fragment>
-            ) : rowData.companion3 ? (
-              <React.Fragment>{rowData.companion3}</React.Fragment>
-            ) : null}
-            {rowData.companion3 && rowData.companion4 ? (
-              <React.Fragment>, {rowData.companion4}</React.Fragment>
-            ) : rowData.companion4 ? (
-              <React.Fragment>{rowData.companion4}</React.Fragment>
-            ) : null}
-          </Box>
-        </React.Fragment>
-      ), [])
+      render: useCallback(
+        (rowData) => (
+          <React.Fragment>
+            <Box display="flex">
+              {rowData.companion1 && (
+                <React.Fragment>{rowData.companion1}</React.Fragment>
+              )}
+              {rowData.companion1 && rowData.companion2 ? (
+                <React.Fragment>, {rowData.companion2}</React.Fragment>
+              ) : rowData.companion2 ? (
+                <React.Fragment>{rowData.companion2}</React.Fragment>
+              ) : null}
+              {rowData.companion2 && rowData.companion3 ? (
+                <React.Fragment>, {rowData.companion3}</React.Fragment>
+              ) : rowData.companion3 ? (
+                <React.Fragment>{rowData.companion3}</React.Fragment>
+              ) : null}
+              {rowData.companion3 && rowData.companion4 ? (
+                <React.Fragment>, {rowData.companion4}</React.Fragment>
+              ) : rowData.companion4 ? (
+                <React.Fragment>{rowData.companion4}</React.Fragment>
+              ) : null}
+            </Box>
+          </React.Fragment>
+        ),
+        []
+      ),
     },
     {
       readonly: true,
@@ -125,36 +136,36 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       hidden: true,
       export: true,
       field: "companion1",
-      width: 50
+      width: 50,
     },
     {
       readonly: true,
       hidden: true,
       export: true,
       field: "companion2",
-      width: 50
+      width: 50,
     },
     {
       readonly: true,
       hidden: true,
       export: true,
       field: "companion3",
-      width: 50
+      width: 50,
     },
     {
       readonly: true,
       hidden: true,
       export: true,
       field: "companion4",
-      width: 50
+      width: 50,
     },
     {
       readonly: false,
       export: true,
       field: "hasBeenScanned",
       title: t("participant.has.been.scanned"),
-      lookup: { false: t("label.no"), true: t("label.yes") }
-    }
+      lookup: { false: t("label.no"), true: t("label.yes") },
+    },
   ];
 
   React.useEffect(() => {
@@ -167,10 +178,30 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
   }, [fetchParticipants, fetchSettings]);
 
   let eventTime = useMemo(() => {
-    return new Date(settings.eventTime1).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) + (settings.eventTime2 && settings.eventTime1 !== settings.eventTime2 ? "/" + new Date(settings.eventTime2).toLocaleTimeString(i18nextInstance.language, {hour: '2-digit', minute:'2-digit'}) : "");
+    return (
+      new Date(settings.eventTime1).toLocaleTimeString(
+        i18nextInstance.language,
+        { hour: "2-digit", minute: "2-digit" }
+      ) +
+      (settings.eventTime2 && settings.eventTime1 !== settings.eventTime2
+        ? "/" +
+          new Date(
+            settings.eventTime2
+          ).toLocaleTimeString(i18nextInstance.language, {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        : "")
+    );
   }, [settings]);
   let eventDate = useMemo(() => {
-    return new Date(settings.eventDate).toLocaleDateString(i18nextInstance.language, { weekday: 'long', month: 'long', day: 'numeric' });
+    return new Date(
+      settings.eventDate
+    ).toLocaleDateString(i18nextInstance.language, {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+    });
   }, [settings]);
 
   return (
@@ -179,15 +210,13 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
       <Notifications />
       <ImvAppBar />
       <Container maxWidth="xl">
-        <Typography component="h1" variant="h5" sx={{mt: 1, mb:1}}>
-        {
-          t("participant.event.subject", {
-            eventTopic: settings.eventTopic || '...',
+        <Typography component="h1" variant="h5" sx={{ mt: 1, mb: 1 }}>
+          {t("participant.event.subject", {
+            eventTopic: settings.eventTopic || "...",
             eventTime,
             eventDate,
-            eventLocation: settings.eventLocation || '...'
-          })
-        }
+            eventLocation: settings.eventLocation || "...",
+          })}
         </Typography>
         <MaterialTable
           isLoading={fetching}
@@ -199,70 +228,85 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
                     {t("participant.no.participant.registered.yet")}
                   </Typography>
                 </React.Fragment>
-              )
+              ),
             },
             header: {
-              actions: t("label.actions")
-            }
+              actions: t("label.actions"),
+            },
           }}
           options={{
             search: false,
-            exportMenu: [{
-              label: 'Export PDF',
-              exportFunc: (cols, datas) => ExportPdf(cols, datas, 'IMV-Landau-Gästeliste-Woche-' + getCurrentCalendarWeek())
-            }, {
-              label: 'Export CSV',
-              exportFunc: (cols, datas) => {
-                let filename = 'IMV-Landau-Gästeliste-Woche-' + getCurrentCalendarWeek();
-                let delimiter = ";";
-                try {
-                  let finalData = datas;
-                  // Grab first item for datas array, make sure it is also an array.
-                  // If it is an object, 'flatten' it into an array of strings.
-                  if (datas.length && !Array.isArray(datas[0])) {
-                    if (typeof datas[0] === 'object') {
-                    // Turn datas into an array of string arrays, without the `tableData` prop
-                    finalData = datas.map(({ tableData, ...row }) => Object.values(row));
+            exportMenu: [
+              {
+                label: "Export PDF",
+                exportFunc: (cols, datas) =>
+                  ExportPdf(
+                    cols,
+                    datas,
+                    "IMV-Landau-Gästeliste-Woche-" + getCurrentCalendarWeek()
+                  ),
+              },
+              {
+                label: "Export CSV",
+                exportFunc: (cols, datas) => {
+                  let filename =
+                    "IMV-Landau-Gästeliste-Woche-" + getCurrentCalendarWeek();
+                  let delimiter = ";";
+                  try {
+                    let finalData = datas;
+                    // Grab first item for datas array, make sure it is also an array.
+                    // If it is an object, 'flatten' it into an array of strings.
+                    if (datas.length && !Array.isArray(datas[0])) {
+                      if (typeof datas[0] === "object") {
+                        // Turn datas into an array of string arrays, without the `tableData` prop
+                        finalData = datas.map(({ tableData, ...row }) =>
+                          Object.values(row)
+                        );
+                      }
                     }
-                  }
-                  finalData = finalData.map(row => {
-                    return row.map(col => {
-                      return col[0] === '+' ? col.replace(/^\+49/, "+49 (0) ") : col;
+                    finalData = finalData.map((row) => {
+                      return row.map((col) => {
+                        return col[0] === "+"
+                          ? col.replace(/^\+49/, "+49 (0) ")
+                          : col;
+                      });
                     });
-                  });
-                  const builder = new CsvBuilder(filename + '.csv');
-                  builder
-                    .setDelimeter(delimiter)
-                    .setColumns(cols.map((col) => col.title))
-                    .addRows(Array.from(finalData))
-                    .exportFile();
-                } catch (err) {
-                  console.error(`error in ExportCsv : ${err}`);
-                }
-              }
-            }],
+                    const builder = new CsvBuilder(filename + ".csv");
+                    builder
+                      .setDelimeter(delimiter)
+                      .setColumns(cols.map((col) => col.title))
+                      .addRows(Array.from(finalData))
+                      .exportFile();
+                  } catch (err) {
+                    console.error(`error in ExportCsv : ${err}`);
+                  }
+                },
+              },
+            ],
             pageSizeOptions: [5, 10, 50, 100, 300, 1000],
             pageSize: 50,
             padding: "dense",
             searchFieldAlignment: "left",
             searchFieldStyle: {
-              marginLeft: theme.spacing(-3)
+              marginLeft: theme.spacing(-3),
             },
-            actionsColumnIndex: -1
+            actionsColumnIndex: -1,
           }}
           icons={tableIcons}
           actions={[
-            rowData => ({
+            (rowData) => ({
               icon: tableIcons.Delete,
               tooltip: t("participant.delete.tooltip"),
               onClick: (event, rowData) => {
                 if (
-                  window.confirm(t("participant.delete.dialog.message") + rowData.name)
+                  window.confirm(
+                    t("participant.delete.dialog.message") + rowData.name
+                  )
                 ) {
                   props.deleteParticipant(rowData.id);
                 }
-              }
-            })
+              },
+            }),
           ]}
           title=""
           columns={columns}
@@ -280,7 +324,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
                   resolve();
                 }
               });
-            }
+            },
           }}
         />
       </Container>
@@ -292,10 +336,7 @@ function Participants({ participants, fetchParticipants, fetchParticipantsFailur
 const mapStateToProps = (state, ownProps) => ({
   participants: state.participants.data,
   fetching: state.participants.fetching,
-  settings: state.settings.data
+  settings: state.settings.data,
 });
 
-export default connect(
-  mapStateToProps,
-  actionCreators
-)(Participants);
+export default connect(mapStateToProps, actionCreators)(Participants);
