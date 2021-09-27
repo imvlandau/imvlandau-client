@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
 import PmbLogo from "./PmbLogo";
 
 const useStyles = makeStyles(theme => ({

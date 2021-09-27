@@ -2,11 +2,11 @@ import {
   ThemeProvider,
   createTheme,
   responsiveFontSizes
-} from "@material-ui/core/styles";
+} from "@mui/material/styles";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import grey from "@material-ui/core/colors/grey";
+import CssBaseline from '@mui/material/CssBaseline';
+import grey from "@mui/material/colors/grey";
 import Auth0ProviderWithHistory from "./auth/Auth0ProviderWithHistory";
 import Home from "./pages/Home";
 import Participant from './pages/Participant';

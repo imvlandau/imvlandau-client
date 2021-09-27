@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import Box from "@material-ui/core/Box";
-import Link from '@material-ui/core/Link';
+import Box from "@mui/material/Box";
+import Link from '@mui/material/Link';
 
 function ImvBrand() {
   const { t } = useTranslation();
