@@ -210,9 +210,9 @@ function Settings({
       fetchSettings();
     } else {
       // updated
-      setSettings(settingsProp);
+      setSettings({...settingsProp});
     }
-  }, [fetching, settingsProp, fetchSettings]);
+  }, [settingsProp]);
 
   return (
     <LocalizationProvider
@@ -387,7 +387,7 @@ function Settings({
                 <Editor
                   apiKey="vri9rv2g9b7the2eisul7xwtgr3fhcd6d5dq3w71e5zp9znt"
                   onInit={(evt, editor) => (editorRef.current = editor)}
-                  initialValue={settingsProp.eventEmailTemplate}
+                  initialValue={settings.eventEmailTemplate}
                   onEditorChange={handleChangeEmailTemplate}
                   init={{
                     entity_encoding: "raw",
