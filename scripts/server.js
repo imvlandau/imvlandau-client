@@ -23,18 +23,6 @@ const sslOptions = process.env.HTTPS === "true" && {
   )
 };
 
-function requireHTTPS(req, res, next) {
-  // The 'x-forwarded-proto' check is for Heroku
-  if (!req.secure &&
-      req.get('x-forwarded-proto') !== 'https' &&
-      process.env.NODE_ENV !== "development" &&
-      process.env.NODE_ENV !== "dev") {
-        return res.redirect('https://' + req.headers.host + req.url);
-  }
-  next();
-}
-app.use(requireHTTPS);
-
 // Pass API-Requests to backend
 app.use(
   proxy("/api", {
@@ -72,5 +60,3 @@ app.get("/*", function(req, res) {
 http.createServer(app).listen(process.env.PORT || 80);
 process.env.HTTPS === "true" &&
   https.createServer(sslOptions, app).listen(process.env.PORT_SSL || 443);
-process.env.HTTPS === "true" &&
-  https.createServer(sslOptions, app).listen(8080);

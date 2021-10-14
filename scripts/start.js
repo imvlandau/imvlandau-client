@@ -39,6 +39,11 @@ const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
 
+const express = require("express");
+const proxy = require("http-proxy-middleware");
+const http = require("http");
+require("dotenv").config({ path: '.env.local' });
+
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
   process.exit(1);
@@ -121,6 +126,17 @@ checkBrowsers(paths.appPath, isInteractive)
       proxyConfig,
       urls.lanUrlForConfig
     );
+
+    const app = express();
+    // Pass API-Requests to backend
+    app.use(
+      proxy("/api", {
+        target: process.env.API_TARGET,
+        protocolRewrite: "https"
+      })
+    );
+    http.createServer(app).listen(process.env.PORT);
+
     const devServer = new WebpackDevServer(compiler, serverConfig);
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {

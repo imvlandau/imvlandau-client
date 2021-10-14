@@ -6,13 +6,12 @@ require("dotenv").config({ path: '.env.local' });
 
 const apiOptions =
   process.env.HTTPS === "true"
-    ? { target: `${process.env.API_TARGET}` }
-    : {
+    ? {
         target: `${process.env.API_TARGET_SSL}`,
         secure: false, // verify the SSL Certs
         protocolRewrite: "https"
-      };
-
+      }
+    : { target: `${process.env.API_TARGET}` };
 
 // this is used just in mode: NODE_ENV === "development"
 module.exports = function(app) {
