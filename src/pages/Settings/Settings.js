@@ -22,8 +22,6 @@ import enLocale from "date-fns/locale/en-US";
 import arSaLocale from "date-fns/locale/ar-SA";
 import { Editor } from "@tinymce/tinymce-react";
 import * as actionCreators from "./actions";
-import { useAuth0 } from "@auth0/auth0-react";
-import { authorized } from "../../services/http";
 import i18nextInstance from "../../i18nextInstance";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
@@ -56,7 +54,6 @@ function Settings({
   const { t } = useTranslation(["settings"]);
   const didMountRef = React.useRef(false);
   const editorRef = React.useRef(null);
-  const { getAccessTokenSilently } = useAuth0();
 
   // ########## settings data
   const [settings, setSettings] = React.useState(settingsProp);
@@ -98,9 +95,6 @@ function Settings({
         }
 
         if (window.confirm(t("settings.confirm.deletion.list.participants"))) {
-          (async () => {
-              const token = await getAccessTokenSilently();
-              token && authorized(token);
               saveSettings(
                 {
                   eventMaximumAmount: settings.eventMaximumAmount,
@@ -118,7 +112,6 @@ function Settings({
                   type: "success",
                 }
               );
-          })();
         }
       } catch (e) {
         saveSettingsFailure([

@@ -10,8 +10,6 @@ import { useTheme } from "@mui/styles";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import { useAuth0 } from "@auth0/auth0-react";
-import { authorized } from "../../services/http";
 import Notifications from "../../containers/Notifications";
 import ImvAppBar from "../../components/ImvAppBar";
 import ImvFooter from "../../components/ImvFooter";
@@ -70,7 +68,6 @@ function Participants({
 }) {
   const theme = useTheme();
   const { t } = useTranslation(["participant"]);
-  const { getAccessTokenSilently } = useAuth0();
 
   const columns = [
     {
@@ -169,12 +166,8 @@ function Participants({
   ];
 
   React.useEffect(() => {
-    (async () => {
-      const token = await getAccessTokenSilently();
-      token && authorized(token);
       fetchSettings();
       fetchParticipants();
-    })();
   }, [fetchParticipants, fetchSettings]);
 
   let eventTime = useMemo(() => {
