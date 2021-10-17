@@ -127,16 +127,6 @@ checkBrowsers(paths.appPath, isInteractive)
       urls.lanUrlForConfig
     );
 
-    const app = express();
-    // Pass API-Requests to backend
-    app.use(
-      proxy("/api", {
-        target: process.env.API_TARGET,
-        protocolRewrite: "https"
-      })
-    );
-    http.createServer(app).listen(process.env.PORT);
-
     const devServer = new WebpackDevServer(compiler, serverConfig);
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
