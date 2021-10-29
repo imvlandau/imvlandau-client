@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -19,7 +20,13 @@ import Avatar from "@mui/material/Avatar";
 export default function PmbProfileMenu() {
   const { t } = useTranslation(["participant"]);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  let user, isAuthenticated, isLoading;
+  const {
+    isAuthenticated,
+    loginWithRedirect,
+    logout,
+    isLoading,
+    user
+  } = useAuth0();
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -30,6 +37,9 @@ export default function PmbProfileMenu() {
   };
 
   const handleLogout = () => {
+    logout({
+      returnTo: window.location.origin,
+    });
     handleClose();
   };
 
@@ -48,7 +58,11 @@ export default function PmbProfileMenu() {
       sx={{ fontStyle: "italic", fontWeight: "light", mr: 1 }}
       color="inherit"
       onClick={() => {
-
+        loginWithRedirect({
+          appState: {
+            returnTo: window.location.pathname,
+          },
+        });
       }}
     >
       <PersonIcon fontSize="small" />
@@ -84,6 +98,13 @@ export default function PmbProfileMenu() {
           <ListItemText
             primary={`${t("button.label.signed.in.as")} ${user.nickname}`}
           />
+        </MenuItem>
+
+        <MenuItem component={Link} to="/profile">
+          <ListItemIcon>
+            <PersonIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText primary={t("button.label.your.profile")} />
         </MenuItem>
 
         <MenuItem component={Link} to="/participant">
