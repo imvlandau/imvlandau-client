@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { red } from "@mui/material/colors";

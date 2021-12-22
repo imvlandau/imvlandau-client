@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import Typography from "@mui/material/Typography";

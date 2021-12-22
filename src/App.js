@@ -3,7 +3,7 @@ import {
   createTheme,
   responsiveFontSizes
 } from "@mui/material/styles";
-import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import grey from "@mui/material/colors/grey";
@@ -60,18 +60,17 @@ const content = window.location.hostname.indexOf('playmobox') !== -1 ? "Playmobo
 
 function App() {
   return (
-    <HelmetProvider>
-      <Helmet
-        titleTemplate={"%s | " + titleTemplate}
-        defaultTitle={"%s | " + defaultTitle}
-        meta={[
-          {
-            name: "description",
-            content: "%s | " + content
-          }
-        ]}
-      />
       <ThemeProvider theme={theme}>
+        <Helmet
+          titleTemplate={"%s | " + titleTemplate}
+          defaultTitle={"%s | " + defaultTitle}
+          meta={[
+            {
+              name: "description",
+              content: "%s | " + content
+            }
+          ]}
+        />
         <CssBaseline />
         <Router>
           <Auth0ProviderWithHistory>
@@ -85,7 +84,6 @@ function App() {
           </Auth0ProviderWithHistory>
         </Router>
       </ThemeProvider>
-    </HelmetProvider>
   );
 }
 

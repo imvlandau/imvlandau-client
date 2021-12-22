@@ -1,5 +1,5 @@
 import React, { forwardRef, useMemo, useCallback } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import * as actionCreators from "./actions";
 import MaterialTable from "@material-table/core";
